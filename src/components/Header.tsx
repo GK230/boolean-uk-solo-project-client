@@ -1,10 +1,10 @@
 import logo from "../assets/logo.png"
+import '../styles/header.css'
 
 function Header() {
     return (
-        <section>
-            <img src={logo} alt="Logo" />
-
+        <section className="header">
+            <img className="logo" src={logo} alt="Logo" />
         </section>
 
 

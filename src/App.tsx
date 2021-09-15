@@ -4,7 +4,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  withRouter
 } from "react-router-dom";
 import Home from "./pages/Home"
 import Header from './components/Header';
@@ -13,26 +14,18 @@ function App() {
   return (
     <Router>
       <div>
-        <Header/>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
+
+      <Header/>
+
         <Switch>
-          <Route path="/">
+          <Route path="/" exact>
             <Home />
           </Route>
         </Switch>
+
+
       </div>
+
     </Router>
     
   );

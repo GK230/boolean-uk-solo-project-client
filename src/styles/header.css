@@ -1,0 +1,13 @@
+section.header {
+  display: grid;
+  grid-template-columns: auto 1fr 200px 200px;
+  align-items: start;
+  position: relative;
+}
+ img.logo {
+   border-radius: 10px;
+   background-color: cornsilk;
+   position: absolute;
+   left: 20px;
+   top: 20px;
+ }
