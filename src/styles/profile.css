@@ -1,0 +1,4 @@
+section.profile {
+  display: grid;
+  place-items: center;
+}
