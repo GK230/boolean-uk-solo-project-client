@@ -1,0 +1,56 @@
+main.product-page {
+  background-color: lightblue;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+div.product {
+  display: grid;
+  grid-template:
+    "product-title product-title" auto
+    "product-image-wrapper product-description" 200px
+    "product-image-wrapper product-description" 50px
+    "product-image-wrapper product-credits" 50px
+    "product-image-wrapper buy" 75px /
+    auto 1fr;
+
+  place-items: center;
+  width: 50rem;
+  gap: 2rem;
+  padding: 3rem;
+}
+
+h3.product-title {
+  grid-area: product-title;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+div.product-image-wrapper {
+  grid-area: product-image-wrapper;
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 10px;
+}
+
+p.product-description {
+  grid-area: product-description;
+}
+
+h4.product-credits {
+  grid-area: product-credits;
+  justify-self: left;
+}
+
+button.buy {
+  grid-area: buy;
+  justify-self: left;
+  padding: 0.5rem;
+  background-color: fuchsia;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: black 2px solid;
+  border-radius: 10px;
+
+}

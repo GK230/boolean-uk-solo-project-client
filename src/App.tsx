@@ -12,12 +12,13 @@ import Products from './pages/Products';
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import ProductPage from "./pages/ProductPage";
 
 
 function App() {
   return (
     <Router>
-      <div>
+      <div className="app-tsx">
 
       <Header/>
 
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/products" exact>
             <Products />
+          </Route>
+          <Route path="/product-page" exact>
+            <ProductPage />
           </Route>
           <Route path="/signup" exact>
             <Signup />

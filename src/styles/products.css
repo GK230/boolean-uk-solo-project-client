@@ -1,4 +1,92 @@
+main.products-page {
+  display: grid;
+  grid-template:
+    "filters header header" 100px
+    "filters container container" 1fr /
+    300px 1fr;
+  background-color: thistle;
+  height: 100vh;
+  width: 100%;
+}
+
+header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 3rem;
+}
+
+button.products-button {
+  width: fit-content;
+  height: fit-content;
+  padding: 1%;
+  font-size: 1.5rem;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+button.filter {
+  background-color: darkslateblue;
+  color: white;
+  border: white solid 2px;
+  justify-self: left;
+  display: grid;
+  place-content: center;
+}
+
+button.filter:hover {
+  border: darkslateblue solid 2px;
+  color: darkslateblue;
+  background-color: white;
+  transition: 1s;
+}
+
+div.auth-buttons {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
+}
+
+button.login {
+  background-color: deepskyblue;
+  color: white;
+  border: white solid 2px;
+}
+
+button.login:hover {
+  border: deepskyblue solid 2px;
+  color: deepskyblue;
+  background-color: white;
+  transition: 1s;
+}
+
+button.signup {
+  background-color: deeppink;
+  color: white;
+  border: white solid 2px;
+}
+
+button.signup:hover {
+  border: deeppink solid 2px;
+  color: deeppink;
+  background-color: white;
+  transition: 1s;
+}
+
+section.filters {
+  grid-area: filters;
+  background-color: thistle;
+}
+
 section.container {
-    display: grid;
-    place-items: center;
+  grid-area: container;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: thistle;
 }

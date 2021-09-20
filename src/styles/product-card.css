@@ -1,3 +1,27 @@
 article.product-card {
-    display: grid;
+  display: grid;
+  grid-template-rows: auto;
+  width: 20rem;
+  height: 30rem;
+  background-color: lavenderblush;
+  border-radius: 10px;
+  gap: 0.4rem;
+  padding: 2rem;
+  place-items: center;
+}
+
+img.product-image {
+  width: 250px;
+  height: 350px;
+  object-fit: cover;
+}
+
+h3.product-title,
+h4.product-credits,
+button.buy {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
 }

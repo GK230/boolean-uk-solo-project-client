@@ -14,9 +14,7 @@ export type SignupForm = {
     username: string;
     avatar: string;
     password: string;
-  };
-
-
+};
 
 function Signup() {
     const [signupForm, setSignupForm] = useState<SignupForm>(initialSignupForm);
@@ -43,15 +41,16 @@ function Signup() {
     }
 
     return (
-        <>
-        <form className="signup-form" onSubmit={handleSubmit}>
-            <input type="email" name="email" placeholder="Email" onChange={handleChange}/>
-            <input type="text" name="username" placeholder="Username" onChange={handleChange}/>
-            <input type="text" name="avatar" placeholder="Avatar" onChange={handleChange}/>
-            <input type="text" name="password" placeholder="Password" onChange={handleChange}/>
-            <input type="submit" value="Submit" />
+        <main className="signup-page">
+            <h2 className="signup-title">Sign up</h2>
+            <form className="signup-form" onSubmit={handleSubmit}>
+                <input type="email" name="email" placeholder="Email" onChange={handleChange}/>
+                <input type="text" name="username" placeholder="Username" onChange={handleChange}/>
+                <input type="text" name="avatar" placeholder="Avatar" onChange={handleChange}/>
+                <input type="text" name="password" placeholder="Password" onChange={handleChange}/>
+                <button className="signup-submit" type="submit" value="submit">Submit</button>
             </form>
-        </>
+        </main>
     )
 }
 

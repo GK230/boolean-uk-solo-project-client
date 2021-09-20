@@ -4,24 +4,29 @@ import "../styles/products.css"
 
 function Products() {
     return (
-    <>
-    <header>
-        <Link to="/login">
-            <button>Log in</button>
-        </Link>
+    <main className="products-page">
+        <header>
+            <button className="products-button filter">Filter</button>
+            <div className="auth-buttons">
+                <Link to="/login">
+                    <button className="products-button auth-button login">Log in</button>
+                </Link>
+                <Link to="/signup">
+                    <button className="products-button auth-button signup">Sign up</button>
+                </Link>
+            </div>
+        </header>
+        <section className="filters"></section>
+        <section className="container">
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
 
-        <Link to="/signup">
-            <button>Sign up</button>
-        </Link>
-
-
-
-    </header>
-    <section className="container">
-        <ProductCard />
-        
-    </section>
-    </>
+        </section>
+    </main>
 
     )
 }
