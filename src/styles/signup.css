@@ -11,7 +11,6 @@ h2.signup-title {
   color: white;
   font-size: 3rem;
   font-weight: bolder;
-  text-decoration: underline white;
 }
 
 form.signup-form {
@@ -44,6 +43,7 @@ button.signup-submit {
   border: none;
   text-decoration: none;
   border: white solid 2px;
+  cursor: pointer;
 }
 
 button.signup-submit:hover {

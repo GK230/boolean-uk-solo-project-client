@@ -1,6 +1,6 @@
-// import { UserCredentials } from "../pages/Login";
+import { UserCredentials } from "../pages/Login";
 
-const URL = "http://localhost:3000/";
+const URL = "http://localhost:3030/";
 
 async function genericFetch(url: string, options?: RequestInit) {
   try {
@@ -38,11 +38,11 @@ export async function getUserPosts() {
   ).data;
 }
 
-// export async function postLoginUser(userCreds: UserCredentials) {
-//   return await (
-//     await genericPost(URL + "login", userCreds)
-//   ).data;
-// }
+export async function postLoginUser(userCreds: UserCredentials) {
+  return await (
+    await genericPost(URL + "login", userCreds)
+  ).data;
+}
 
 export async function getLogoutUser() {
   return await (

@@ -1,4 +1,49 @@
-section.profile {
+main.profile {
+  background-color: rgb(188, 235, 188);
+  height: 100%;
   display: grid;
-  place-items: center;
+  place-content: center;
+}
+
+section.profile-details {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+}
+
+img.profile-avatar {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  justify-self: center;
+  align-self: end;
+  margin-top: 8rem;
+}
+
+h4.profile-credits {
+  font-size: 2rem;
+  width: fit-content;
+  border: black solid 2px;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background-color: cornflowerblue;
+  align-self: center;
+  justify-self: right;
+}
+
+h3.profile-items-title {
+  padding: 2rem;
+  text-align: left;
+  font-size: 2rem;
+  font-weight: bold;
+  color: black;
+}
+
+section.purchased-products,
+section.swapped-products {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap;
 }

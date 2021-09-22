@@ -1,10 +1,20 @@
 import create from "zustand";
 
+let baseUrl = "http://localhost:3030";
+
 export type SignupForm = {
   email: string;
   username: string;
   avatar: string;
   password: string;
+};
+
+export type SwapForm = {
+  itemImage: string;
+  title: string;
+  description: string;
+  itemType: string;
+  brand: string;
 };
 
 export type User = {
@@ -50,13 +60,16 @@ export type Review = {
 type Store = {
   createUser: (data: SignupForm) => void;
   users: User[];
+  addItem: (data: SwapForm) => void;
+  items: Item[];
 };
 
 const useStore = create<Store>((set, get) => ({
   users: [],
+  items: [],
 
   createUser: (data) => {
-    fetch("http://localhost:3030/user", {
+    fetch(`${baseUrl}/user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,6 +79,17 @@ const useStore = create<Store>((set, get) => ({
     })
       .then((resp) => resp.json())
       .then((newUser) => set({ users: [...get().users, newUser] }));
+  },
+  addItem: (data) => {
+    fetch(`${baseUrl}/items`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resp) => resp.json())
+      .then((newItem) => set({ items: [...get().items, newItem] }));
   },
 }));
 

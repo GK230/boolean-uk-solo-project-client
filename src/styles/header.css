@@ -1,13 +1,115 @@
 section.header {
   display: grid;
-  grid-template-columns: auto 1fr 200px 200px;
   align-items: start;
   position: relative;
+  height: 0;
 }
+
 img.logo {
   border-radius: 10px;
   background-color: cornsilk;
   position: absolute;
   left: 20px;
   top: 20px;
+  opacity: 1;
+}
+
+section.loggedin-header {
+  background-color: transparent;
+  height: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 4rem;
+  position: relative;
+}
+
+h3.welcome {
+  position: absolute;
+  top: 1.4rem;
+  left: -15rem;
+  color: black;
+  font-size: 1.3rem;
+  font-weight: bolder;
+  align-self: end;
+}
+
+div.loggedin-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  justify-self: right;
+  gap: 1rem;
+  position: absolute;
+  right: -375px;
+  top: 40px;
+}
+
+button.profile,
+button.swap,
+button.shop,
+button.logout {
+  cursor: pointer;
+  width: 100px;
+  height: 50px;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border: white solid 2px;
+  color: white;
+}
+
+button.profile {
+  background-color: blueviolet;
+}
+
+button.swap {
+  background-color:darkseagreen;
+}
+
+button.shop {
+  background-color:coral;
+}
+
+
+button.logout {
+  background-color: turquoise;
+}
+
+button.logout:hover {
+  border: turquoise solid 2px;
+  color: turquoise;
+  background-color: white;
+  transition: 1s;
+}
+
+div.auth-buttons {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
+}
+
+button.login {
+  background-color: deepskyblue;
+  color: white;
+  border: white solid 2px;
+}
+
+button.login:hover {
+  border: deepskyblue solid 2px;
+  color: deepskyblue;
+  background-color: white;
+  transition: 1s;
+}
+
+button.signup {
+  background-color: deeppink;
+  color: white;
+  border: white solid 2px;
+}
+
+button.signup:hover {
+  border: deeppink solid 2px;
+  color: deeppink;
+  background-color: white;
+  transition: 1s;
 }

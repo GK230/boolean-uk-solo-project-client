@@ -1,0 +1,23 @@
+main.swap-page {
+  background-color: darkcyan;
+  height: 100vh;
+  place-items: center;
+}
+
+.itemPhotoFile {
+  border: none;
+}
+
+textarea {
+  width: 20rem;
+  height: 3rem;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  border: white solid 1px;
+  padding-left: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  max-height: 100px;
+  resize: none;
+  height: 300px;
+  padding-top: 0.5rem;
+}

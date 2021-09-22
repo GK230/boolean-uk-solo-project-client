@@ -1,0 +1,12 @@
+main.basket-page {
+  height: 100vh;
+  background-color: lightpink;
+  display: grid;
+  place-items: center;
+}
+
+section.basket-products {
+  display: grid;
+  grid-template-rows: auto;
+}
+

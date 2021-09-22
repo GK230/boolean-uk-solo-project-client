@@ -3,6 +3,14 @@ main.product-page {
   height: 100vh;
   display: grid;
   place-items: center;
+  position: relative;
+}
+
+img.basket-icon {
+  position: absolute;
+  width: 80px;
+  top: 40px;
+  right: 40px;
 }
 
 div.product {
@@ -34,6 +42,10 @@ div.product-image-wrapper {
   border-radius: 10px;
 }
 
+img.product-image {
+  width: 300px;
+}
+
 p.product-description {
   grid-area: product-description;
 }
@@ -43,14 +55,14 @@ h4.product-credits {
   justify-self: left;
 }
 
-button.buy {
+button.add-to-basket {
   grid-area: buy;
   justify-self: left;
   padding: 0.5rem;
   background-color: fuchsia;
   font-size: 1.5rem;
   font-weight: bold;
-  border: black 2px solid;
+  border: white 2px solid;
   border-radius: 10px;
-
+  color: white;
 }

@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Redirect,
+  useHistory,
   BrowserRouter as Router,
   Switch,
   Route,
@@ -10,22 +12,72 @@ import Home from "./pages/Home"
 import Header from './components/Header';
 import Products from './pages/Products';
 import Signup from "./pages/Signup";
-import Login from "./pages/Login";
+import Login, { UserCredentials } from "./pages/Login";
 import Profile from "./pages/Profile";
 import ProductPage from "./pages/ProductPage";
+import Basket from "./pages/Basket";
+import { getValidateCurrToken, postLoginUser } from "./utils/apiClient";
+import Swap from "./pages/Swap";
 
+export type User = {
+  id: number;
+  username: string;
+  password: string;
+};
+
+type ErrorOpts = {
+  [key: string]: null | string;
+};
 
 function App() {
-  return (
-    <Router>
-      <div className="app-tsx">
+  const [loggedUser, setLoggedUser] = useState<User | null>(null);
+  const [errorStatus, setErrorStatus] = useState<string>("empty");
+  let history = useHistory();
 
-      <Header/>
+  function loginUser(userCreds: UserCredentials) {
+    postLoginUser(userCreds).then(user => {
+      setLoggedUser(user);
+      history.push("/product-page");
+    });
+  }
+
+  useEffect(() => {
+    getValidateCurrToken()
+      .then(user => {
+        setLoggedUser(user);
+        history.push("/profile");
+      })
+      .catch(err => {
+        setErrorStatus(err.message);
+      });
+  }, []);
+
+  function clearUserState(data: null) {
+    setLoggedUser(data);
+  }
+
+  const errorMsgs: ErrorOpts = {
+    empty: null,
+    401: "You weren't previously logged in",
+    403: null,
+  };
+
+  return (
+    <Router >
+      <div className="app-tsx">
+      
+
+      <Header loggedUser={loggedUser} clearUserState={clearUserState}/>
+      {/* {errorStatus && (
+          // <h3 style={{ color: "red" }}>{errorMsgs[errorStatus]}</h3>
+        )} */}
+        
 
         <Switch>
-          <Route path="/" exact>
+        <Route path="/" exact>
             <Home />
-          </Route>
+          </Route>m
+          
           <Route path="/products" exact>
             <Products />
           </Route>
@@ -36,17 +88,21 @@ function App() {
             <Signup />
           </Route>
           <Route path="/login" exact>
-            <Login />
+          <Login handleSubmit={loginUser} />
+          {loggedUser?.username ? <Profile /> : <Redirect to="/login"/> }
           </Route>
           <Route path="/profile" exact>
-            <Profile />
+          {loggedUser?.username ? <Profile /> : <Redirect to="/login"/> }
+          </Route>
+          <Route path="/basket" exact>
+            <Basket />
+          </Route>
+          <Route path="/swap" exact>
+            <Swap />
           </Route>
         </Switch>
-
-
-      </div>
-
-    </Router>
+        </div>
+      </Router>
     
   );
 }

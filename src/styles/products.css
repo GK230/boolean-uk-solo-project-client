@@ -34,6 +34,7 @@ button.filter {
   justify-self: left;
   display: grid;
   place-content: center;
+  align-self: end;
 }
 
 button.filter:hover {
@@ -43,37 +44,7 @@ button.filter:hover {
   transition: 1s;
 }
 
-div.auth-buttons {
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 1rem;
-}
 
-button.login {
-  background-color: deepskyblue;
-  color: white;
-  border: white solid 2px;
-}
-
-button.login:hover {
-  border: deepskyblue solid 2px;
-  color: deepskyblue;
-  background-color: white;
-  transition: 1s;
-}
-
-button.signup {
-  background-color: deeppink;
-  color: white;
-  border: white solid 2px;
-}
-
-button.signup:hover {
-  border: deeppink solid 2px;
-  color: deeppink;
-  background-color: white;
-  transition: 1s;
-}
 
 section.filters {
   grid-area: filters;

@@ -10,7 +10,6 @@ main.home {
   grid-template-rows: 1fr auto 150px;
   place-items: center;
   gap: 0.5rem;
-
 }
 
 img.main-image {
@@ -23,14 +22,20 @@ h2.title {
   font-size: 3rem;
 }
 
-button.shop {
+button.home-shop {
   width: 250px;
   height: 75px;
-  border: none;
   font-size: 3rem;
   font-weight: bolder;
   border-radius: 20px;
   background-color: fuchsia;
-  color: gainsboro;
+  color: white;
   cursor: pointer;
+  border: white solid 2px;
+}
+
+button.home-shop:hover {
+  background-color: white;
+  color: fuchsia;
+  border: fuchsia solid 2px;
 }
