@@ -18,8 +18,9 @@ import ProductPage from "./pages/ProductPage";
 import Basket from "./pages/Basket";
 import { getValidateCurrToken, postLoginUser } from "./utils/apiClient";
 import Swap from "./pages/Swap";
+import useStore from "./store"; 
 
-export type User = {
+export type UserCreds = {
   id: number;
   username: string;
   password: string;
@@ -30,7 +31,9 @@ type ErrorOpts = {
 };
 
 function App() {
-  const [loggedUser, setLoggedUser] = useState<User | null>(null);
+  const loggedUser = useStore((state: any) => state.loggedUser)
+  const setLoggedUser = useStore((state: any) => state.setLoggedUser)
+
   const [errorStatus, setErrorStatus] = useState<string>("empty");
   let history = useHistory();
 
@@ -68,9 +71,9 @@ function App() {
       
 
       <Header loggedUser={loggedUser} clearUserState={clearUserState}/>
-      {/* {errorStatus && (
-          // <h3 style={{ color: "red" }}>{errorMsgs[errorStatus]}</h3>
-        )} */}
+      {errorStatus && (
+          <h3 style={{ color: "red" }}>{errorMsgs[errorStatus]}</h3>
+        )}
         
 
         <Switch>

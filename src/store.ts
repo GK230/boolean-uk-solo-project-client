@@ -2,6 +2,12 @@ import create from "zustand";
 
 let baseUrl = "http://localhost:3030";
 
+export type UserCreds = {
+  id: number;
+  username: string;
+  password: string;
+};
+
 export type SignupForm = {
   email: string;
   username: string;
@@ -10,10 +16,10 @@ export type SignupForm = {
 };
 
 export type SwapForm = {
-  itemImage: string;
+  itemImages: string;
   title: string;
   description: string;
-  itemType: string;
+  itemType: string[];
   brand: string;
 };
 
@@ -21,10 +27,10 @@ export type User = {
   id: number;
   email: string;
   username: string;
-  password: string;
+  // password: string;
   avatar: string;
   totalCredits: Number;
-  purchasese?: Purchase[];
+  purchase?: Purchase[];
   Items?: Item[];
   reviews?: Review[];
 };
@@ -58,15 +64,31 @@ export type Review = {
 };
 
 type Store = {
-  createUser: (data: SignupForm) => void;
   users: User[];
-  addItem: (data: SwapForm) => void;
   items: Item[];
-};
+  loggedUser: User;
+  setLoggedUser: (arg: User) => void;
+  createUser: (data: SignupForm) => void;
+  addItem: (data: SwapForm) => void;
+  getValidateCurrToken: () => void;
+}
 
 const useStore = create<Store>((set, get) => ({
   users: [],
   items: [],
+  loggedUser: {
+    id: 0,
+    email: "",
+    username: "",
+    avatar: "",
+    totalCredits: 0,
+    purchase: [],
+    items: [],
+    reviews: []
+  },
+	setLoggedUser: (loggedUser) => set({ loggedUser: loggedUser }),
+  
+  
 
   createUser: (data) => {
     fetch(`${baseUrl}/user`, {
@@ -87,10 +109,21 @@ const useStore = create<Store>((set, get) => ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     })
       .then((resp) => resp.json())
       .then((newItem) => set({ items: [...get().items, newItem] }));
   },
+  getValidateCurrToken: () => {
+    fetch(`${baseUrl}/validate-token`, {
+      credentials: "include",
+    })
+      .then(resp => resp.json())
+      .then(userToken => {
+        set({ loggedUser: userToken })
+      })
+  },
+  
 }));
 
 export default useStore;

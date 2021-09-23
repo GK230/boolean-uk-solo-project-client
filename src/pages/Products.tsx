@@ -44,18 +44,53 @@ const style = {
     },
   };
   
-  const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
+  const itemTypes = [
+    
+        "fashion",
+          "home",
+        "mens",
+         "womens",
+        "shoes",
+       "tops",
+         "bottoms",
+         "dresses",
+         "coats",
+         "jackets",
+         "boots",
+         "sandals",
+         "trainers",
+       "shirts",
+       "t-shirts",
+       "leggings",
+       "jeans",
+       "bedroom",
+       "kitchen",
+       "living-room",
+      
   ];
+
+  const brands = [
+    
+     "Adidas",
+         "Levi's",
+         "North Face",
+         "Clarks",
+         "Nike",
+         "Converse",
+       "Next",
+         "Primark",
+         "Rayban",
+         "H&M",
+         "Matalan",
+        "PUMA",
+         "Tu Clothing",
+        "George",
+         "Timberland",
+         "Selfridges",
+         "River Island",
+         "Reebok",
+  
+];
   
   const marks = [
     {
@@ -156,7 +191,7 @@ function Products() {
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {itemTypes.map((name) => (
             <MenuItem key={name} value={name}>
               <Checkbox checked={personName.indexOf(name) > -1} />
               <ListItemText primary={name} />

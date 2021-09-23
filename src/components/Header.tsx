@@ -1,11 +1,11 @@
 import logo from "../assets/logo.png"
 import '../styles/header.css'
 import { Link, useLocation } from "react-router-dom"
-import { User } from "../App";
+import { UserCreds } from "../App";
 import { getLogoutUser } from "../utils/apiClient";
 
 type HeaderProps = {
-    loggedUser: User | null;
+    loggedUser: UserCreds | null;
     clearUserState: (data: null) => void;
   };
 
@@ -53,12 +53,15 @@ type HeaderProps = {
               <img className="logo" src={logo} alt="Logo" />
             </Link>
             <div className="auth-buttons">
+              
                 <Link to="/login">
                     <button className="products-button auth-button login">Log in</button>
                 </Link>
+                
                 <Link to="/signup">
                     <button className="products-button auth-button signup">Sign up</button>
                 </Link>
+                
             </div>
             {loggedUser ? (
         <LoggedInHeader

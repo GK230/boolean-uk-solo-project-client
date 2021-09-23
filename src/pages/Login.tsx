@@ -1,7 +1,8 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useState, useEffect } from "react";
 import "../styles/signup.css"
 import "../styles/login.css"
-import { Link } from "react-router-dom"
+import { Link , useHistory} from "react-router-dom"
+import { getValidateCurrToken } from "../utils/apiClient";
 
 const initialForm = {
     username: "",
@@ -12,14 +13,24 @@ const initialForm = {
     username: string;
     password: string;
   };
+
+  export type UserCreds = {
+    id: number;
+    username: string;
+    password: string;
+  };
   
   type LoginProps = {
     handleSubmit: (formData: { password: string; username: string }) => void;
   };
 
 function Login({ handleSubmit }: LoginProps) {
+  let history = useHistory();
+
 
     const [loginForm, setLoginForm] = useState<UserCredentials>(initialForm);
+    const [loggedUser, setLoggedUser] = useState<UserCreds | null>(null);
+    const [errorStatus, setErrorStatus] = useState<string>("empty");
 
     function handleLoginChange(e: SyntheticEvent) {
         const { name, value } = e.target as HTMLInputElement;
@@ -28,9 +39,19 @@ function Login({ handleSubmit }: LoginProps) {
       }
 
       
-    
 
-    return (
+      useEffect(() => {
+        getValidateCurrToken()
+          .then(user => {
+            setLoggedUser(user);
+            history.push("/profile");
+          })
+          .catch(err => {
+            setErrorStatus(err.message);
+          });
+      }, []);
+
+      return (
         <main className="signup-page">
           <h2 className="signup-title">Log in</h2>
           <form className="signup-form" onSubmit={e => {
@@ -51,3 +72,5 @@ function Login({ handleSubmit }: LoginProps) {
 }
 
 export default Login
+
+

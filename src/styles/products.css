@@ -17,14 +17,14 @@ header {
 }
 
 button.products-button {
-  width: fit-content;
-  height: fit-content;
   padding: 1%;
   font-size: 1.5rem;
-  width: 100px;
+  width: 125px;
   height: 40px;
-  border-radius: 10px;
-  background-color: white;
+  border-radius: 15px;
+  font-weight: bold;
+  display: grid;
+  place-content: center;
 }
 
 button.filter {
