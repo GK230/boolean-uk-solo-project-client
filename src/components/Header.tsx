@@ -27,7 +27,7 @@ type HeaderProps = {
             </Link>
         {loggedUser.username === null? 
   
-              <Redirect to="/home" />:
+              <Redirect to="/" />:
 
         <h3 className="welcome">Welcome, {loggedUser.username}</h3>}
         <div className="loggedin-buttons">

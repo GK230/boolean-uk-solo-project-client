@@ -20,6 +20,7 @@ img.main-image {
 h2.title {
   color: white;
   font-size: 3rem;
+  font-weight: bolder;
 }
 
 button.home-shop {
