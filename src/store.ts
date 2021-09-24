@@ -27,7 +27,6 @@ export type User = {
   id: number;
   email: string;
   username: string;
-  // password: string;
   avatar: string;
   totalCredits: Number;
   purchase?: Purchase[];
@@ -71,6 +70,8 @@ type Store = {
   createUser: (data: SignupForm) => void;
   addItem: (data: SwapForm) => void;
   getValidateCurrToken: () => void;
+  logout: () => void;
+
 }
 
 const useStore = create<Store>((set, get) => ({
@@ -122,8 +123,32 @@ const useStore = create<Store>((set, get) => ({
       .then(userToken => {
         set({ loggedUser: userToken })
       })
-  },
-  
+  },logout: () => {
+    fetch(`${baseUrl}/logout`, {
+      credentials: "include",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw Error("Failed to logout");
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        setLoggedUser(null);
+      })
+      .catch((error) => console.error(error));
+    }
+   
 }));
 
 export default useStore;
+function setLoggedUser(arg0: null) {
+  throw new Error("Function not implemented.");
+}
+

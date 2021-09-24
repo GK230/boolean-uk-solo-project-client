@@ -1,8 +1,9 @@
 import logo from "../assets/logo.png"
 import '../styles/header.css'
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, Route, Redirect } from "react-router-dom"
 import { UserCreds } from "../App";
 import { getLogoutUser } from "../utils/apiClient";
+import useStore from "../store"
 
 type HeaderProps = {
     loggedUser: UserCreds | null;
@@ -10,16 +11,25 @@ type HeaderProps = {
   };
 
 
-  function LoggedInHeader({
+  export function LoggedInHeader({
     username,
     clearUserState,
-  }: {
-    username: string;
-    clearUserState: (data: null) => void;
-  }) {
+  }: any) {
+    const loggedUser = useStore(state => state.loggedUser)
+
+    
+
+
     return (
       <section className="loggedin-header">
-        <h3 className="welcome">Welcome, {username}</h3>
+        <Link to="/">
+              <img className="logo" src={logo} alt="Logo" />
+            </Link>
+        {loggedUser.username === null? 
+  
+              <Redirect to="/home" />:
+
+        <h3 className="welcome">Welcome, {loggedUser.username}</h3>}
         <div className="loggedin-buttons">
           <Link to="/swap">
             <button className="swap">Swap</button>
@@ -44,7 +54,7 @@ type HeaderProps = {
   }
   
 
-  function Header({ loggedUser, clearUserState }: HeaderProps) {
+  export function Header({ loggedUser, clearUserState }: HeaderProps) {
     const location = useLocation();
 
     return (
@@ -63,16 +73,10 @@ type HeaderProps = {
                 </Link>
                 
             </div>
-            {loggedUser ? (
-        <LoggedInHeader
-          username={loggedUser.username}
-          clearUserState={clearUserState}
-        />
-      ) : null}
+            
         </section>
 
 
     )
 }
 
-export default Header

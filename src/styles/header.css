@@ -12,6 +12,7 @@ img.logo {
   left: 20px;
   top: 20px;
   opacity: 1;
+  border: fuchsia 2px solid;
 }
 
 section.loggedin-header {
@@ -39,7 +40,7 @@ div.loggedin-buttons {
   justify-self: right;
   gap: 1rem;
   position: absolute;
-  right: -375px;
+  right: 20px;
   top: 40px;
 }
 
@@ -86,6 +87,9 @@ div.auth-buttons {
   display: grid;
   grid-template-columns: auto auto;
   gap: 1rem;
+  position: absolute;
+  right: 20px;
+  top: 40px;
 }
 
 button.login {

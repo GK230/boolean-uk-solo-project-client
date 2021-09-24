@@ -17,11 +17,9 @@ function Profile() {
                 <PurchasedProductCard />
                 <PurchasedProductCard />
                 <PurchasedProductCard />
-                <PurchasedProductCard />
             </section>
             <h3 className="profile-items-title">Swapped items</h3>
             <section className="swapped-products">
-                <SwappedProductCard />
                 <SwappedProductCard />
                 <SwappedProductCard />
                 <SwappedProductCard />

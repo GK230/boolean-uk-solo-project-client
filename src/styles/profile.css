@@ -18,6 +18,7 @@ img.profile-avatar {
   justify-self: center;
   align-self: end;
   margin-top: 8rem;
+  border: black solid 2px;
 }
 
 h4.profile-credits {
@@ -32,11 +33,17 @@ h4.profile-credits {
 }
 
 h3.profile-items-title {
-  padding: 2rem;
+  padding: 1rem;
   text-align: left;
   font-size: 2rem;
   font-weight: bold;
   color: black;
+  background-color: chocolate;
+  border: black solid 2px;
+  border-radius: 5px;
+  margin: 3rem 0;
+  display: inline;
+  width: fit-content;
 }
 
 section.purchased-products,
@@ -46,4 +53,14 @@ section.swapped-products {
   gap: 2rem;
   padding: 2rem;
   flex-wrap: wrap;
+  width: 80vw;
+  background-color: bisque;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+section.swapped-products {
+  background-color: cadetblue;
+  margin-bottom: 2rem;
 }

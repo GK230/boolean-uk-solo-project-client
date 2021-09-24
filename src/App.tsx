@@ -9,7 +9,7 @@ import {
   withRouter
 } from "react-router-dom";
 import Home from "./pages/Home"
-import Header from './components/Header';
+import  { Header } from './components/Header';
 import Products from './pages/Products';
 import Signup from "./pages/Signup";
 import Login, { UserCredentials } from "./pages/Login";
@@ -19,6 +19,7 @@ import Basket from "./pages/Basket";
 import { getValidateCurrToken, postLoginUser } from "./utils/apiClient";
 import Swap from "./pages/Swap";
 import useStore from "./store"; 
+import { LoggedInHeader } from './components/Header';
 
 export type UserCreds = {
   id: number;
@@ -65,15 +66,25 @@ function App() {
     403: null,
   };
 
+  type HeaderProps = {
+    loggedUser: UserCreds | null;
+    clearUserState: (data: null) => void;
+  };
+
   return (
     <Router >
       <div className="app-tsx">
       
-
-      <Header loggedUser={loggedUser} clearUserState={clearUserState}/>
-      {errorStatus && (
+      {loggedUser ? (
+        <LoggedInHeader
+          loggedUser={loggedUser.username}
+          clearUserState={clearUserState}
+        />
+      ) : <Header loggedUser={loggedUser} clearUserState={clearUserState}/> }
+      
+      {/* {errorStatus && (
           <h3 style={{ color: "red" }}>{errorMsgs[errorStatus]}</h3>
-        )}
+        )} */}
         
 
         <Switch>

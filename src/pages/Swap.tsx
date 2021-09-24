@@ -2,7 +2,7 @@ import React from "react"
 import "../styles/signup.css"
 import "../styles/swap.css"
 import useStore from "../store"
-import { useHistory } from "react-router"
+import { useHistory, Redirect } from "react-router"
 import { SyntheticEvent, useState } from "react"
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -61,6 +61,8 @@ const itemType = [
 function Swap() {
 
     const loggedUser = useStore(state => state.loggedUser)
+
+    if (!loggedUser) { <Redirect to="/home" />}
     
     const userId = loggedUser.id
 

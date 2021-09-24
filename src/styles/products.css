@@ -35,6 +35,8 @@ button.filter {
   display: grid;
   place-content: center;
   align-self: end;
+  width: 100px;
+  height: 50px;
 }
 
 button.filter:hover {
