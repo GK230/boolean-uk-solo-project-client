@@ -1,7 +1,28 @@
 main.swap-page {
   background-color: darkcyan;
-  height: 100vh;
+  height: 100%;
   place-items: center;
+}
+
+input.itemPhotoFile {
+  border: none;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+
+label.itemPhotoFile {
+  text-align: left;
+  color: white;
+  font-size: 1.5rem;
+  padding-left: 0;
+}
+
+#demo-multiple-name-label, #demo-simple-select-label {
+  color: white;
+  font-size: 1.5rem;
+  display: grid;
+  place-content: center;
+
 }
 
 .itemPhotoFile {

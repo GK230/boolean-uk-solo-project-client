@@ -63,14 +63,34 @@ button.profile {
   background-color: blueviolet;
 }
 
+button.profile:hover {
+  background-color: white;
+  color:blueviolet;
+  border: blueviolet solid 2px;
+  transition: 1s;
+}
+
 button.swap {
   background-color:darkseagreen;
+}
+
+button.swap:hover {
+  background-color: white;
+  color:darkseagreen;
+  border: darkseagreen solid 2px;
+  transition: 1s;
 }
 
 button.shop {
   background-color:coral;
 }
 
+button.shop:hover {
+  background-color: white;
+  color:coral;
+  border: coral solid 2px;
+  transition: 1s;
+}
 
 button.logout {
   background-color: turquoise;

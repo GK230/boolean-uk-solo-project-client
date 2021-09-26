@@ -25,7 +25,7 @@ type HeaderProps = {
         <Link to="/">
               <img className="logo" src={logo} alt="Logo" />
             </Link>
-        {loggedUser.username === null? 
+        {loggedUser === null? 
   
               <Redirect to="/" />:
 

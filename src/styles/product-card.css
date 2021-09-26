@@ -8,6 +8,7 @@ article.product-card {
   gap: 0.4rem;
   padding: 2rem;
   place-items: center;
+  border: gray solid 2px;
 }
 
 img.product-card-image {

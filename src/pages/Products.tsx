@@ -1,4 +1,5 @@
 import React from "react";
+import { SyntheticEvent } from "react";
 import { Link } from "react-router-dom"
 import ProductCard from "../components/ProductCard"
 import "../styles/products.css"
@@ -20,6 +21,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import Checkbox from '@mui/material/Checkbox';
 import Slider from '@mui/material/Slider';
+import { setConstantValue } from "typescript";
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -47,55 +49,53 @@ const style = {
   const itemTypes = [
     
         "fashion",
-          "home",
+        "home",
         "mens",
-         "womens",
+        "womens",
         "shoes",
-       "tops",
-         "bottoms",
-         "dresses",
-         "coats",
-         "jackets",
-         "boots",
-         "sandals",
-         "trainers",
-       "shirts",
-       "t-shirts",
-       "leggings",
-       "jeans",
-       "bedroom",
-       "kitchen",
-       "living-room",
-      
-  ];
+        "tops",
+        "bottoms",
+        "dresses",
+        "coats",
+        "jackets",
+        "boots",
+        "sandals",
+        "trainers",
+        "shirts",
+        "t-shirts",
+        "leggings",
+        "jeans",
+        "bedroom",
+        "kitchen",
+        "living-room",
+      ];
 
   const brands = [
     
-     "Adidas",
-         "Levi's",
-         "North Face",
-         "Clarks",
-         "Nike",
-         "Converse",
-       "Next",
-         "Primark",
-         "Rayban",
-         "H&M",
-         "Matalan",
+        "Adidas",
+        "Levi's",
+        "North Face",
+        "Clarks",
+        "Nike",
+        "Converse",
+        "Next",
+        "Primark",
+        "Rayban",
+        "H&M",
+        "Matalan",
         "PUMA",
-         "Tu Clothing",
+        "Tu Clothing",
         "George",
-         "Timberland",
-         "Selfridges",
-         "River Island",
-         "Reebok",
-  
-];
+        "Timberland",
+        "Selfridges",
+        "River Island",
+        "Reebok",
+  ];
   
   const marks = [
     {
-      value: 0,
-      label: '1',
+      value: 10,
+      label: '10',
     },
     {
       value: 20,
@@ -106,8 +106,32 @@ const style = {
       label: '30',
     },
     {
-      value: 10000,
-      label: '10,000',
+      value: 40,
+      label: '40',
+    },
+    {
+      value: 50,
+      label: '50',
+    },
+    {
+      value: 60,
+      label: '60',
+    },
+    {
+      value: 70,
+      label: '70',
+    },
+    {
+      value: 80,
+      label: '80',
+    },
+    {
+      value: 90,
+      label: '90',
+    },
+    {
+      value: 100,
+      label: '100',
     },
   ];
   
@@ -116,37 +140,41 @@ const style = {
   }
 
 function Products() {
-    const [personName, setPersonName] = React.useState<string[]>([]);
+    const [itemType, setItemType] = React.useState<string[]>([]);
+    const [brand, setBrand] = React.useState<string[]>([]);
+    const [val, setVal] = React.useState(0);
 
-    const [state, setState] = React.useState({
-        gilad: true,
-        jason: false,
-        antoine: false,
-      });
+    const handleChange = (event: any, newValue: number | number[]) => {
+      setVal(newValue as number);
+    };
 
-      const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setState({
-          ...state,
-          [event.target.name]: event.target.checked,
-        });
-      };
+    console.log(val)
+    
+
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    const handleChangeItemTypes = (event: SelectChangeEvent<typeof itemType>) => {
+      const {
+        target: { value },
+      } = event;
+      setItemType(
+        // On autofill we get a the stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+      );
+    };
+
+    const handleChangeBrands = (event: SelectChangeEvent<typeof brand>) => {
         const {
           target: { value },
         } = event;
-        setPersonName(
+        setBrand(
           // On autofill we get a the stringified value.
           typeof value === 'string' ? value.split(',') : value,
         );
       };
-
-      const { gilad, jason, antoine } = state;
-    const error = [gilad, jason, antoine].filter((v) => v).length !== 2;
 
     return (
     <main className="products-page">
@@ -179,76 +207,67 @@ function Products() {
           <Box sx={style}>
           
             <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Item</InputLabel>
-        <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
-          renderValue={(selected) => selected.join(', ')}
-          MenuProps={MenuProps}
-        >
-          {itemTypes.map((name) => (
-            <MenuItem key={name} value={name}>
-              <Checkbox checked={personName.indexOf(name) > -1} />
-              <ListItemText primary={name} />
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="demo-multiple-checkbox-label">Type</InputLabel>
+                <Select
+                  labelId="demo-multiple-checkbox-label"
+                  id="demo-multiple-checkbox"
+                  multiple
+                  value={itemType}
+                  onChange={handleChangeItemTypes}
+                  input={<OutlinedInput label="Type" />}
+                  renderValue={(selected) => selected.join(', ')}
+                  MenuProps={MenuProps}
+                >
+                  {itemTypes.map((name) => (
+                    <MenuItem key={name} value={name}>
+                      <Checkbox checked={itemType.indexOf(name) > -1} />
+                      <ListItemText primary={name} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+          <FormControl sx={{ m: 1, width: 300 }}>
+            <InputLabel id="demo-multiple-checkbox-label">Brand</InputLabel>
+            <Select
+              labelId="demo-multiple-checkbox-label"
+              id="demo-multiple-checkbox"
+              multiple
+              value={brand}
+              onChange={handleChangeBrands}
+              input={<OutlinedInput label="Tag" />}
+              renderValue={(selected) => selected.join(', ')}
+              MenuProps={MenuProps}
+            >
+              {brands.map((name) => (
+                <MenuItem key={name} value={name}>
+                  <Checkbox checked={brand.indexOf(name) > -1} />
+                  <ListItemText primary={name} />
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+        <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+          Max Credits
 
-    <Box sx={{ display: 'flex' }}>
-      <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-        <FormLabel component="legend">Size</FormLabel>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox checked={gilad} onChange={handleCheckBoxChange} name="gilad" />
-            }
-            label="Gilad Gray"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={jason} onChange={handleCheckBoxChange} name="jason" />
-            }
-            label="Jason Killian"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={antoine} onChange={handleCheckBoxChange} name="antoine" />
-            }
-            label="Antoine Llorca"
-          />
-        </FormGroup>
-      </FormControl>
-      </Box>
-      
-    </div>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Max Credits
-
-              </Typography>
+          </Typography>
               <Box sx={{ width: 300 }}>
-      <Slider
-        aria-label="Always visible"
-        defaultValue={80}
-        getAriaValueText={valuetext}
-        step={10}
-        marks={marks}
-        valueLabelDisplay="on"
-      />
-    </Box>
-            
-          </Box>
-          
+          <Slider
+            aria-label="Always visible"
+            defaultValue={80}
+            getAriaValueText={valuetext}
+            step={10}
+            marks={marks}
+            valueLabelDisplay="on"
+            value={val}
+            onChange={handleChange}
+          />
+        </Box>
+        </Box>
         </Fade>
-
       </Modal>
     </main>
-
     )
 }
 

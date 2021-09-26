@@ -13,6 +13,7 @@ import { Theme, useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
+import { isWhiteSpaceLike } from "typescript"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -64,7 +65,6 @@ function Swap() {
 
     if (!loggedUser) { <Redirect to="/home" />}
     
-    const userId = loggedUser.id
 
     // const [itemImages, setItemImages] = React.useState<string[]>([]);
     const [itemImages, setItemImages] = React.useState('');
@@ -77,23 +77,23 @@ function Swap() {
 
 
     const newItem = {
-      userId: userId,
+      userId: loggedUser.id,
       itemImages: itemImages,
       title: title,
       description: description,
       itemType: personName,
       brand: brand,
+      user: loggedUser.username,
     };
+
+
+
+
   
     // const currentUser = useStore(state => state.loggedUser)
     const theme = useTheme();
     
-    
     const addItem = useStore(state => state.addItem)
-
-    
-
-    
 
     const history = useHistory()
 
@@ -130,10 +130,10 @@ function Swap() {
         <main className="signup-page swap-page">
             <h2 className="signup-title swap-title">Swap</h2>
             <form className="signup-form" onSubmit={handleSubmit} action="/profile-upload-multiple" encType="multipart/form-data">
-                <label>
+                <label className="itemPhotoFile">
                     Item photos:
-                    <input multiple className="itemPhotoFile" type="file"  name="itemImages" placeholder="Item images" onChange={(e) => setItemImages(e.target.value)}/>
                 </label>
+                    <input multiple className="itemPhotoFile" type="file"  name="itemImages" placeholder="Item images" onChange={(e) => setItemImages(e.target.value)}/>
                 <input type="text" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)}/>
                 <textarea name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}/>
                 <div>
@@ -160,7 +160,7 @@ function Swap() {
                     </Select>
                   </FormControl>
                 </div>        
-                <Box sx={{ minWidth: 120 }}>
+                <Box sx={{ width: 300 }}>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Brand</InputLabel>
                     <Select
