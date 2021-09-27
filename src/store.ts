@@ -113,7 +113,8 @@ const useStore = create<Store>((set, get) => ({
       credentials: "include",
     })
       .then((resp) => resp.json())
-      .then((newItem) => set({ items: [...get().items, newItem] }));
+      .then(resp => console.log(resp))
+      // .then((newItem) => set({ items: [...get().items, newItem] }));
   },
   getValidateCurrToken: () => {
     fetch(`${baseUrl}/validate-token`, {

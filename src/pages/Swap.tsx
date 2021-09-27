@@ -14,6 +14,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { isWhiteSpaceLike } from "typescript"
+import { useRef } from "react";
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -61,12 +63,28 @@ const itemType = [
 
 function Swap() {
 
+    const [image, setImage] = React.useState<string|Blob>('');
+    const [url, setUrl] = React.useState<string>('');
+
+
+    const uploadImage = () => {
+      const data = new FormData()
+      
+      data.append("file", image)
+      data.append("upload_preset", "i4dx9ajm")
+      data.append("cloud_name", "dj9f9rioe")
+      fetch("https://cloundinary.com/v1_1/dj9f9rioe/image/upload", {
+        method: "POST",
+        body: data
+      }).then(resp => resp.json())
+      .then(data => {setUrl(data.url)})
+      .catch(err => console.log(err))
+    }
+    
     const loggedUser = useStore(state => state.loggedUser)
 
     if (!loggedUser) { <Redirect to="/home" />}
     
-
-    // const [itemImages, setItemImages] = React.useState<string[]>([]);
     const [itemImages, setItemImages] = React.useState('');
 
     const [title, setTitle] = React.useState('');
@@ -133,7 +151,9 @@ function Swap() {
                 <label className="itemPhotoFile">
                     Item photos:
                 </label>
-                    <input multiple className="itemPhotoFile" type="file"  name="itemImages" placeholder="Item images" onChange={(e) => setItemImages(e.target.value)}/>
+                <input className="itemPhotoFile" type="file"  name="itemImages" placeholder="Item images"  
+ onChange={(e) => setImage(e.target.files ? e.target.files[0] : '')}/>
+                    
                 <input type="text" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)}/>
                 <textarea name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}/>
                 <div>
@@ -192,7 +212,7 @@ function Swap() {
                     </Select>
                   </FormControl>
                 </Box>                
-                <button className="signup-submit" type="submit" value="submit">Submit</button>
+                <button className="signup-submit" onClick={uploadImage} type="submit" value="submit">Submit</button>
             </form>
         </main>
     )
