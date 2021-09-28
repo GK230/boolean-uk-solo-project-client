@@ -16,7 +16,6 @@ export type SignupForm = {
 };
 
 export type SwapForm = {
-  itemImages: string;
   title: string;
   description: string;
   itemType: string[];
@@ -71,8 +70,7 @@ type Store = {
   addItem: (data: SwapForm) => void;
   getValidateCurrToken: () => void;
   logout: () => void;
-
-}
+};
 
 const useStore = create<Store>((set, get) => ({
   users: [],
@@ -85,11 +83,9 @@ const useStore = create<Store>((set, get) => ({
     totalCredits: 0,
     purchase: [],
     items: [],
-    reviews: []
+    reviews: [],
   },
-	setLoggedUser: (loggedUser) => set({ loggedUser: loggedUser }),
-  
-  
+  setLoggedUser: (loggedUser) => set({ loggedUser: loggedUser }),
 
   createUser: (data) => {
     fetch(`${baseUrl}/user`, {
@@ -113,18 +109,18 @@ const useStore = create<Store>((set, get) => ({
       credentials: "include",
     })
       .then((resp) => resp.json())
-      .then(resp => console.log(resp))
-      // .then((newItem) => set({ items: [...get().items, newItem] }));
+      .then((newItem) => set({ items: [...get().items, newItem] }));
   },
   getValidateCurrToken: () => {
     fetch(`${baseUrl}/validate-token`, {
       credentials: "include",
     })
-      .then(resp => resp.json())
-      .then(userToken => {
-        set({ loggedUser: userToken })
-      })
-  },logout: () => {
+      .then((resp) => resp.json())
+      .then((userToken) => {
+        set({ loggedUser: userToken });
+      });
+  },
+  logout: () => {
     fetch(`${baseUrl}/logout`, {
       credentials: "include",
       method: "GET",
@@ -144,12 +140,10 @@ const useStore = create<Store>((set, get) => ({
         setLoggedUser(null);
       })
       .catch((error) => console.error(error));
-    }
-   
+  },
 }));
 
 export default useStore;
 function setLoggedUser(arg0: null) {
   throw new Error("Function not implemented.");
 }
-

@@ -63,23 +63,6 @@ const itemType = [
 
 function Swap() {
 
-    const [image, setImage] = React.useState<string|Blob>('');
-    const [url, setUrl] = React.useState<string>('');
-
-
-    const uploadImage = () => {
-      const data = new FormData()
-      
-      data.append("file", image)
-      data.append("upload_preset", "i4dx9ajm")
-      data.append("cloud_name", "dj9f9rioe")
-      fetch("https://cloundinary.com/v1_1/dj9f9rioe/image/upload", {
-        method: "POST",
-        body: data
-      }).then(resp => resp.json())
-      .then(data => {setUrl(data.url)})
-      .catch(err => console.log(err))
-    }
     
     const loggedUser = useStore(state => state.loggedUser)
 
@@ -91,12 +74,32 @@ function Swap() {
     const [description, setDescription] = React.useState('');
     const [personName, setPersonName] = React.useState<string[]>([]);
     const [brand, setBrand] = React.useState('');
-    // const [newItem, setNewItem] = useState(initialItemData)
+
+    function submitForm(event: SyntheticEvent) {
+      const targetEvent = event.target as HTMLFormElement;
+      event.preventDefault();
+      const formData = new FormData();
+      const images = targetEvent.files.files;
+
+
+      for(let i = 0; i < images.length; i++) {
+              formData.append("files", images[i]);
+
+      }
+      fetch("http://localhost:3030/upload_files", {
+          method: 'post',
+          // headers: {
+          //   "Content-Type": "multipart/form-data" 
+          // },
+          body: formData
+      })
+          .then((res) => console.log(res))
+          .catch((err) => (err));
+  }
 
 
     const newItem = {
       userId: loggedUser.id,
-      itemImages: itemImages,
       title: title,
       description: description,
       itemType: personName,
@@ -104,24 +107,12 @@ function Swap() {
       user: loggedUser.username,
     };
 
-
-
-
-  
-    // const currentUser = useStore(state => state.loggedUser)
     const theme = useTheme();
     
     const addItem = useStore(state => state.addItem)
 
     const history = useHistory()
 
-    // function handleChange(event: any) {
-    //     const { name, value } = event.target as HTMLInputElement;
-
-    //     setNewItem({ ...newItem, [name]: value });
-
-        
-    //   }
 
       const handleChangeItemTypes = (event: SelectChangeEvent<typeof itemType>) => {
         const {
@@ -141,20 +132,18 @@ function Swap() {
     function handleSubmit(e: SyntheticEvent) {
         e.preventDefault()
         addItem(newItem)
-        console.log(newItem)
     }
 
     return (
         <main className="signup-page swap-page">
             <h2 className="signup-title swap-title">Swap</h2>
-            <form className="signup-form" onSubmit={handleSubmit} action="/profile-upload-multiple" encType="multipart/form-data">
+            <form className="signup-form" action="/profile-upload-multiple" encType="multipart/form-data" onSubmit={submitForm}>
                 <label className="itemPhotoFile">
                     Item photos:
                 </label>
-                <input className="itemPhotoFile" type="file"  name="itemImages" placeholder="Item images"  
- onChange={(e) => setImage(e.target.files ? e.target.files[0] : '')}/>
+                <input className="files" type="file" multiple  name="files" placeholder="Item images"/>
                     
-                <input type="text" name="title" placeholder="Title" onChange={(e) => setTitle(e.target.value)}/>
+                <input type="text" name="title" placeholder="Title" accept="image/*" onChange={(e) => setTitle(e.target.value)}/>
                 <textarea name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}/>
                 <div>
                   <FormControl sx={{ m: 1, width: 300 }}>
@@ -212,7 +201,7 @@ function Swap() {
                     </Select>
                   </FormControl>
                 </Box>                
-                <button className="signup-submit" onClick={uploadImage} type="submit" value="submit">Submit</button>
+                <button className="signup-submit" type="submit" value="submit">Submit</button>
             </form>
         </main>
     )
