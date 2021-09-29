@@ -1,6 +1,6 @@
 import { UserCredentials } from "../pages/Login";
 
-const URL = "http://localhost:3030/";
+const URL = process.env.REACT_APP_API_URL;
 
 async function genericFetch(url: string, options?: RequestInit) {
   try {
