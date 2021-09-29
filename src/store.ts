@@ -88,7 +88,7 @@ const useStore = create<Store>((set, get) => ({
   setLoggedUser: (loggedUser) => set({ loggedUser: loggedUser }),
 
   createUser: (data) => {
-    fetch(`${baseUrl}/user`, {
+    fetch(`${baseUrl}user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
