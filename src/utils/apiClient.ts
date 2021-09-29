@@ -6,7 +6,7 @@ async function genericFetch(url: string, options?: RequestInit) {
   try {
     const response = await fetch(url, { ...options, credentials: "include" });
 
-    if (!response.ok) throw new Error(response.status.toString());
+    // if (!response.ok) throw new Error(response.status.toString());
 
     return await response.json();
   } catch (error) {
