@@ -1,7 +1,7 @@
-import React, { SyntheticEvent, useState, useEffect } from "react";
+import { SyntheticEvent, useState, useEffect } from "react";
 import "../styles/signup.css"
 import "../styles/login.css"
-import { Link , useHistory} from "react-router-dom"
+import { useHistory} from "react-router-dom"
 import { getValidateCurrToken } from "../utils/apiClient";
 
 const initialForm = {
@@ -31,6 +31,8 @@ function Login({ handleSubmit }: LoginProps) {
     const [loginForm, setLoginForm] = useState<UserCredentials>(initialForm);
     const [loggedUser, setLoggedUser] = useState<UserCreds | null>(null);
     const [errorStatus, setErrorStatus] = useState<string>("empty");
+    console.log(loggedUser)
+    console.log(errorStatus)
 
     function handleLoginChange(e: SyntheticEvent) {
         const { name, value } = e.target as HTMLInputElement;
@@ -49,7 +51,7 @@ function Login({ handleSubmit }: LoginProps) {
           .catch(err => {
             setErrorStatus(err.message);
           });
-      }, []);
+      }, [history]);
 
       return (
         <main className="signup-page">

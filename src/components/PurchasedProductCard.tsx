@@ -1,6 +1,5 @@
 import "../styles/product-card.css"
 import test from "../assets/clock.jpg"
-import { Link } from "react-router-dom"
 
 function PurchasedProductCard() {
     return (

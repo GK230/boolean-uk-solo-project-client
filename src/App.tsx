@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Redirect,
   useHistory,
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  withRouter
 } from "react-router-dom";
 import Home from "./pages/Home"
 import  { Header } from './components/Header';
@@ -27,16 +25,13 @@ export type UserCreds = {
   password: string;
 };
 
-type ErrorOpts = {
-  [key: string]: null | string;
-};
-
 function App() {
   const loggedUser = useStore((state: any) => state.loggedUser)
   const setLoggedUser = useStore((state: any) => state.setLoggedUser)
 
   const [errorStatus, setErrorStatus] = useState<string>("empty");
   let history = useHistory();
+  console.log(errorStatus)
 
   function loginUser(userCreds: UserCredentials) {
     postLoginUser(userCreds).then(user => {
@@ -54,22 +49,11 @@ function App() {
       .catch(err => {
         setErrorStatus(err.message);
       });
-  }, []);
+  }, [history, setLoggedUser]);
 
   function clearUserState(data: null) {
     setLoggedUser(data);
   }
-
-  const errorMsgs: ErrorOpts = {
-    empty: null,
-    401: "You weren't previously logged in",
-    403: null,
-  };
-
-  type HeaderProps = {
-    loggedUser: UserCreds | null;
-    clearUserState: (data: null) => void;
-  };
 
   return (
     <Router >

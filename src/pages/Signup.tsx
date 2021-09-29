@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from "react"
+import { SyntheticEvent, useState } from "react"
 import "../styles/signup.css"
 import useStore from "../store"
 

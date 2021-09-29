@@ -2,8 +2,8 @@ import React from "react"
 import "../styles/signup.css"
 import "../styles/swap.css"
 import useStore from "../store"
-import { useHistory, Redirect } from "react-router"
-import { SyntheticEvent, useState } from "react"
+import { Redirect } from "react-router"
+import { SyntheticEvent } from "react"
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,10 +11,6 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Theme, useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { Link } from "react-router-dom";
-import { useParams } from 'react-router-dom';
-import { isWhiteSpaceLike } from "typescript"
-import { useRef } from "react";
 import { baseUrl } from "../store"
 
 
@@ -68,8 +64,6 @@ function Swap() {
 
     if (!loggedUser) { <Redirect to="/home" />}
     
-    const [itemImages, setItemImages] = React.useState('');
-
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [personName, setPersonName] = React.useState<string[]>([]);
@@ -115,20 +109,11 @@ function Swap() {
           .catch((err) => (err));
   }
 
-    const newItem = {
-      userId: loggedUser.id,
-      title: title,
-      description: description,
-      itemType: personName,
-      brand: brand,
-      user: loggedUser.username,
-    };
+
 
     const theme = useTheme();
     
-    const addItem = useStore(state => state.addItem)
 
-    const history = useHistory()
 
 
       
@@ -136,12 +121,7 @@ function Swap() {
       const handleChangeBrand = (event: SelectChangeEvent) => {
         setBrand(event.target.value as string);
       };
-    
- 
-    function handleSubmit(e: SyntheticEvent) {
-        e.preventDefault()
-        addItem(newItem)
-    }
+
 
     return (
         <main className="signup-page swap-page">

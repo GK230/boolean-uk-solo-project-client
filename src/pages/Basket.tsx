@@ -1,5 +1,4 @@
 import "../styles/product-page.css"
-import { Link } from "react-router-dom"
 import "../styles/basket.css"
 import BasketItem from "../components/BasketItem"
 

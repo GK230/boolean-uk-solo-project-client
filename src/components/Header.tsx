@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png"
 import '../styles/header.css'
-import { Link, useLocation, Route, Redirect } from "react-router-dom"
+import { Link, Redirect } from "react-router-dom"
 import { UserCreds } from "../App";
 import { getLogoutUser } from "../utils/apiClient";
 import useStore from "../store"
@@ -55,7 +55,6 @@ type HeaderProps = {
   
 
   export function Header({ loggedUser, clearUserState }: HeaderProps) {
-    const location = useLocation();
 
     return (
         <section className="header">

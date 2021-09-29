@@ -1,5 +1,4 @@
 import "../styles/profile.css"
-import { Link } from "react-router-dom"
 import PurchasedProductCard from "../components/PurchasedProductCard"
 import SwappedProductCard from "../components/SwappedProductCard"
 

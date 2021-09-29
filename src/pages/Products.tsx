@@ -1,6 +1,5 @@
 import React from "react";
-import { SyntheticEvent } from "react";
-import { Link } from "react-router-dom"
+
 import ProductCard from "../components/ProductCard"
 import "../styles/products.css"
 
@@ -15,13 +14,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import FormLabel from '@mui/material/FormLabel';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
+
 import Checkbox from '@mui/material/Checkbox';
 import Slider from '@mui/material/Slider';
-import { setConstantValue } from "typescript";
 
 const style = {
     position: 'absolute' as 'absolute',

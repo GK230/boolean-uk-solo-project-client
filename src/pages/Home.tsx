@@ -1,8 +1,7 @@
 import "../styles/home.css"
-import { Link, useHistory } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 function Home() {
-    const history = useHistory();
 
     return (
         <main className="home">
