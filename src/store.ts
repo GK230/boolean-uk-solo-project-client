@@ -1,6 +1,8 @@
 import create from "zustand";
 
-let baseUrl = "http://localhost:3030";
+export const baseUrl = process.env.REACT_APP_VARIABLE_NAME;
+
+
 
 export type UserCreds = {
   id: number;
@@ -73,6 +75,7 @@ type Store = {
 };
 
 const useStore = create<Store>((set, get) => ({
+
   users: [],
   items: [],
   loggedUser: {

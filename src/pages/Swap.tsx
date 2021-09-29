@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { isWhiteSpaceLike } from "typescript"
 import { useRef } from "react";
+import { baseUrl } from "../store"
 
 
 const ITEM_HEIGHT = 48;
@@ -63,7 +64,6 @@ const itemType = [
 
 function Swap() {
 
-    
     const loggedUser = useStore(state => state.loggedUser)
 
     if (!loggedUser) { <Redirect to="/home" />}
@@ -75,28 +75,45 @@ function Swap() {
     const [personName, setPersonName] = React.useState<string[]>([]);
     const [brand, setBrand] = React.useState('');
 
+    const handleChangeItemTypes = (event: SelectChangeEvent<typeof itemType>) => {
+      const {
+        target: { value },
+      } = event;
+      setPersonName(
+        // On autofill we get a the stringified value.
+        typeof value === 'string' ? value.split(',') : value,
+      );
+    };
+
+   
+
     function submitForm(event: SyntheticEvent) {
       const targetEvent = event.target as HTMLFormElement;
       event.preventDefault();
       const formData = new FormData();
       const images = targetEvent.files.files;
-
-
       for(let i = 0; i < images.length; i++) {
               formData.append("files", images[i]);
 
       }
-      fetch("http://localhost:3030/upload_files", {
+      formData.append("title", title)
+      formData.append("description", description)
+      const names = personName
+      for(let i = 0; i < names.length; i++) {
+        formData.append("items", names[i]);
+      }
+      formData.append("brand", brand)
+      const user = loggedUser.username
+
+      formData.append("user", user)
+
+      fetch(`${baseUrl}/upload_files`, {
           method: 'post',
-          // headers: {
-          //   "Content-Type": "multipart/form-data" 
-          // },
           body: formData
       })
           .then((res) => console.log(res))
           .catch((err) => (err));
   }
-
 
     const newItem = {
       userId: loggedUser.id,
@@ -114,15 +131,7 @@ function Swap() {
     const history = useHistory()
 
 
-      const handleChangeItemTypes = (event: SelectChangeEvent<typeof itemType>) => {
-        const {
-          target: { value },
-        } = event;
-        setPersonName(
-          // On autofill we get a the stringified value.
-          typeof value === 'string' ? value.split(',') : value,
-        );
-      };
+      
     
       const handleChangeBrand = (event: SelectChangeEvent) => {
         setBrand(event.target.value as string);
@@ -149,6 +158,7 @@ function Swap() {
                   <FormControl sx={{ m: 1, width: 300 }}>
                     <InputLabel id="demo-multiple-name-label">Item type</InputLabel>
                     <Select
+                      name="theItems"
                       labelId="demo-multiple-name-label"
                       id="demo-multiple-name"
                       multiple
@@ -172,8 +182,7 @@ function Swap() {
                 <Box sx={{ width: 300 }}>
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">Brand</InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
+                    <Select                      labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       value={brand}
                       label="Brand"
