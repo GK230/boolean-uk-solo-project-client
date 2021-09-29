@@ -1,6 +1,6 @@
 import create from "zustand";
 
-export const baseUrl = "http://localhost:3030";
+export const baseUrl = process.env.REACT_APP_API_URL;
 
 export type UserCreds = {
   id: number;
