@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { SyntheticEvent, useState, useEffect } from "react";
 import "../styles/signup.css"
 import "../styles/login.css"
@@ -51,7 +52,7 @@ function Login({ handleSubmit }: LoginProps) {
           .catch(err => {
             setErrorStatus(err.message);
           });
-      }, [history]);
+      }, []);
 
       return (
         <main className="signup-page">
