@@ -1,6 +1,6 @@
 import create from "zustand";
 
-export const baseUrl = process.env.REACT_APP_API_URL;
+export const baseUrl = "http://localhost:3030";
 
 export type UserCreds = {
   id: number;
@@ -11,7 +11,6 @@ export type UserCreds = {
 export type SignupForm = {
   email: string;
   username: string;
-  avatar: string;
   password: string;
 };
 
@@ -88,7 +87,7 @@ const useStore = create<Store>((set, get) => ({
   setLoggedUser: (loggedUser) => set({ loggedUser: loggedUser }),
 
   createUser: (data) => {
-    fetch(`${baseUrl}user`, {
+    fetch(`${baseUrl}/user`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -98,6 +97,7 @@ const useStore = create<Store>((set, get) => ({
     })
       .then((resp) => resp.json())
       .then((newUser) => set({ users: [...get().users, newUser] }));
+      
   },
   addItem: (data) => {
     fetch(`${baseUrl}/items`, {

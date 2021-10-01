@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Redirect,
   useHistory,
@@ -14,10 +14,9 @@ import Login, { UserCredentials } from "./pages/Login";
 import Profile from "./pages/Profile";
 import ProductPage from "./pages/ProductPage";
 import Basket from "./pages/Basket";
-import { getValidateCurrToken, postLoginUser } from "./utils/apiClient";
+import { postLoginUser } from "./utils/apiClient";
 import Swap from "./pages/Swap";
-import useStore from "./store"; 
-import { LoggedInHeader } from './components/Header';
+// import { LoggedInHeader } from './components/Header';
 
 export type UserCreds = {
   id: number;
@@ -25,56 +24,53 @@ export type UserCreds = {
   password: string;
 };
 
-function App() {
-  const loggedUser = useStore((state: any) => state.loggedUser)
-  const setLoggedUser = useStore((state: any) => state.setLoggedUser)
+export type User = {
+  id: number;
+  username: string;
+  password: string;
+  bio?: string;
+};
 
-  const [errorStatus, setErrorStatus] = useState<string>("empty");
-  let history = useHistory();
-  console.log(errorStatus)
+function App() {
+  const [loggedUser, setLoggedUser] = useState<User | null>(null);
+  const history = useHistory();
 
   function loginUser(userCreds: UserCredentials) {
     postLoginUser(userCreds).then(user => {
       setLoggedUser(user);
-      history.push("/product-page");
+      history.push("/");
     });
   }
-
-  useEffect(() => {
-    getValidateCurrToken()
-      .then(user => {
-        setLoggedUser(user);
-        history.push("/profile");
-      })
-      .catch(err => {
-        setErrorStatus(err.message);
-      });
-  }, [history, setLoggedUser]);
 
   function clearUserState(data: null) {
     setLoggedUser(data);
   }
 
+  // useEffect(() => {
+  //   getValidateCurrToken()
+  //     .then(user => {
+  //       setLoggedUser(user);
+  //       history.push("/profile");
+  //     })
+  //     .catch(err => {
+  //       setErrorStatus(err.message);
+  //     });
+  // }, [history, setLoggedUser]);
+
+
   return (
     <Router >
       <div className="app-tsx">
       
-      {loggedUser ? (
-        <LoggedInHeader
-          loggedUser={loggedUser.username}
-          clearUserState={clearUserState}
-        />
-      ) : <Header loggedUser={loggedUser} clearUserState={clearUserState}/> }
-      
-      {/* {errorStatus && (
-          <h3 style={{ color: "red" }}>{errorMsgs[errorStatus]}</h3>
-        )} */}
+      <Header loggedUser={loggedUser} clearUserState={clearUserState} />
+
+
         
 
         <Switch>
         <Route path="/" exact>
             <Home />
-          </Route>m
+          </Route>
           
           <Route path="/products" exact>
             <Products />
@@ -106,3 +102,7 @@ function App() {
 }
 
 export default App;
+
+
+
+

@@ -97,9 +97,9 @@ function Swap() {
         formData.append("items", names[i]);
       }
       formData.append("brand", brand)
-      const user = loggedUser.username
+      // const user = loggedUser.username
 
-      formData.append("user", user)
+      // formData.append("user", user)
 
       fetch(`${baseUrl}/upload_files`, {
           method: 'post',
@@ -109,16 +109,9 @@ function Swap() {
           .catch((err) => (err));
   }
 
-
-
     const theme = useTheme();
     
-
-
-
-      
-    
-      const handleChangeBrand = (event: SelectChangeEvent) => {
+    const handleChangeBrand = (event: SelectChangeEvent) => {
         setBrand(event.target.value as string);
       };
 
@@ -130,10 +123,10 @@ function Swap() {
                 <label className="itemPhotoFile">
                     Item photos:
                 </label>
-                <input className="files" type="file" multiple  name="files" placeholder="Item images"/>
+                <input className="files" type="file" multiple  name="files" placeholder="Item images" required/>
                     
-                <input type="text" name="title" placeholder="Title" accept="image/*" onChange={(e) => setTitle(e.target.value)}/>
-                <textarea name="description" placeholder="Description" onChange={(e) => setDescription(e.target.value)}/>
+                <input type="text" name="title" placeholder="Title" accept="image/*"  required onChange={(e) => setTitle(e.target.value)}/>
+                <textarea name="description" placeholder="Description" required onChange={(e) => setDescription(e.target.value)}/>
                 <div>
                   <FormControl sx={{ m: 1, width: 300 }}>
                     <InputLabel id="demo-multiple-name-label">Item type</InputLabel>
@@ -146,6 +139,7 @@ function Swap() {
                       onChange={handleChangeItemTypes}
                       input={<OutlinedInput label="Name" />}
                       MenuProps={MenuProps}
+                      required
                     >
                       {itemType.map((name) => (
                         <MenuItem
@@ -168,6 +162,7 @@ function Swap() {
                       label="Brand"
                       onChange={handleChangeBrand}
                       name="brand"
+                      required
                     >
                       <MenuItem value={"Adidas"}>Adidas</MenuItem>
                       <MenuItem value={"Levi's"}>Levi's</MenuItem>

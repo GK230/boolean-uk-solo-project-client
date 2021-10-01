@@ -1,9 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { SyntheticEvent, useState, useEffect } from "react";
+import { SyntheticEvent, useState } from "react";
 import "../styles/signup.css"
 import "../styles/login.css"
-import { useHistory} from "react-router-dom"
-import { getValidateCurrToken } from "../utils/apiClient";
+// import { getValidateCurrToken } from "../utils/apiClient";
 
 const initialForm = {
     username: "",
@@ -14,26 +13,18 @@ const initialForm = {
     username: string;
     password: string;
   };
-
-  export type UserCreds = {
-    id: number;
-    username: string;
-    password: string;
-  };
   
   type LoginProps = {
     handleSubmit: (formData: { password: string; username: string }) => void;
   };
 
 function Login({ handleSubmit }: LoginProps) {
-  let history = useHistory();
-
 
     const [loginForm, setLoginForm] = useState<UserCredentials>(initialForm);
-    const [loggedUser, setLoggedUser] = useState<UserCreds | null>(null);
-    const [errorStatus, setErrorStatus] = useState<string>("empty");
-    console.log(loggedUser)
-    console.log(errorStatus)
+    // const [loggedUser, setLoggedUser] = useState<UserCreds | null>(null);
+    // const [errorStatus, setErrorStatus] = useState<string>("empty");
+    // console.log(loggedUser)
+    // console.log(errorStatus)
 
     function handleLoginChange(e: SyntheticEvent) {
         const { name, value } = e.target as HTMLInputElement;
@@ -43,16 +34,16 @@ function Login({ handleSubmit }: LoginProps) {
 
       
 
-      useEffect(() => {
-        getValidateCurrToken()
-          .then(user => {
-            setLoggedUser(user);
-            history.push("/profile");
-          })
-          .catch(err => {
-            setErrorStatus(err.message);
-          });
-      }, []);
+      // useEffect(() => {
+      //   getValidateCurrToken()
+      //     .then(user => {
+      //       setLoggedUser(user);
+      //       <Redirect to="/profile"/>
+      //     })
+      //     .catch(err => {
+      //       setErrorStatus(err.message);
+      //     });
+      // }, []);
 
       return (
         <main className="signup-page">
@@ -64,7 +55,7 @@ function Login({ handleSubmit }: LoginProps) {
       }}
       >
             <input type="text" name="username" placeholder="Username" onChange={handleLoginChange} value={loginForm.username}/>
-            <input type="text" name="password" placeholder="Password"onChange={handleLoginChange} value={loginForm.password}/>
+            <input type="password" name="password" placeholder="Password"onChange={handleLoginChange} value={loginForm.password}/>
             <button className="signup-submit" type="submit" value="submit">Submit</button>
           </form>
       

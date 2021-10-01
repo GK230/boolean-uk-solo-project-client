@@ -14,7 +14,10 @@ type HeaderProps = {
   export function LoggedInHeader({
     username,
     clearUserState,
-  }: any) {
+  }: {
+    username: string;
+    clearUserState: (data: null) => void;
+  }) {
     const loggedUser = useStore(state => state.loggedUser)
 
     
@@ -78,4 +81,6 @@ type HeaderProps = {
 
     )
 }
+
+ 
 

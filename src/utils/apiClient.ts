@@ -3,15 +3,9 @@ import { UserCredentials } from "../pages/Login";
 const URL = process.env.REACT_APP_API_URL;
 
 async function genericFetch(url: string, options?: RequestInit) {
-  try {
-    const response = await fetch(url, { ...options, credentials: "include" });
-
-    // if (!response.ok) throw new Error(response.status.toString());
-
-    return await response.json();
-  } catch (error) {
-    throw error;
-  }
+  return await (
+    await fetch(url, { ...options, credentials: "include" })
+  ).json();
 }
 
 /* 
@@ -40,18 +34,12 @@ export async function getUserPosts() {
 
 export async function postLoginUser(userCreds: UserCredentials) {
   return await (
-    await genericPost(URL + "login", userCreds)
+    await genericPost(URL + "/login", userCreds)
   ).data;
 }
 
 export async function getLogoutUser() {
   return await (
-    await genericFetch(URL + "logout")
-  ).data;
-}
-
-export async function getValidateCurrToken() {
-  return await (
-    await genericFetch(URL + "validate-token")
+    await genericFetch(URL + "/logout")
   ).data;
 }
