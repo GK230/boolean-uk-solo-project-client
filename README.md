@@ -2,6 +2,7 @@
 
 An online home and fashion swapping and shopping app - users can upload items in return for credits and then spend those credits on other items on the site
 
+![swapshop-image](https://user-images.githubusercontent.com/52134584/136001540-6c297c4e-3a08-4558-a3a3-ebcf7e11361f.png)
 
 
 
