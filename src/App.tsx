@@ -73,20 +73,61 @@ function App() {
           </Route>
           
           <Route path="/products" exact>
-            <Products />
+            <Products item={{
+              id: 0,
+              userId: 1,
+              credits: 0,
+              image: "",
+              title: "",
+              description: "",
+              itemTypes: [],
+              brand: "",
+              review: undefined
+            }} />
           </Route>
           <Route path="/product-page" exact>
-            <ProductPage />
+            <ProductPage item={{
+              id: 0,
+              userId: 1,
+              credits: 0,
+              image: "",
+              title: "",
+              description: "",
+              itemTypes: [],
+              brand: "",
+              review: undefined
+            }} />
           </Route>
           <Route path="/signup" exact>
             <Signup />
           </Route>
           <Route path="/login" exact>
           <Login handleSubmit={loginUser} />
-          {loggedUser?.username ? <Profile /> : <Redirect to="/login"/> }
+          {loggedUser?.username ? <Profile item={{
+              id: 0,
+              userId: 1,
+              credits: 0,
+              image: "",
+              title: "",
+              description: "",
+              itemTypes: [],
+              brand: "",
+              review: undefined
+            }}/> : <Redirect to="/login"/> }
           </Route>
           <Route path="/profile" exact>
-          {loggedUser?.username ? <Profile /> : <Redirect to="/login"/> }
+            
+          {loggedUser?.username ? <Profile item={{
+              id: 0,
+              userId: 1,
+              credits: 0,
+              image: "",
+              title: "",
+              description: "",
+              itemTypes: [],
+              brand: "",
+              review: undefined
+            }}/> : <Redirect to="/login"/> }
           </Route>
           <Route path="/basket" exact>
             <Basket />

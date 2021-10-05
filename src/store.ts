@@ -62,18 +62,28 @@ export type Review = {
 
 type Store = {
   users: User[];
+  setLoggedUser: (user: User) => void;
   items: Item[];
+  userItems: Item[];
   loggedUser: User;
-  setLoggedUser: (arg: User) => void;
+  setUserItems: (items: Item[]) => void;
+  setItems: (items: Item[]) => void;
   createUser: (data: SignupForm) => void;
   addItem: (data: SwapForm) => void;
   getValidateCurrToken: () => void;
   logout: () => void;
+  getAllItems: () => void;
+  getUserItems: (id: number) => void;
 };
 
 const useStore = create<Store>((set, get) => ({
   users: [],
   items: [],
+  setItems: (items) => set({ items: items }),
+
+  userItems: [],
+  setUserItems: (userItems) => set({ userItems: userItems }),
+
   loggedUser: {
     id: 0,
     email: "",
@@ -97,7 +107,6 @@ const useStore = create<Store>((set, get) => ({
     })
       .then((resp) => resp.json())
       .then((newUser) => set({ users: [...get().users, newUser] }));
-      
   },
   addItem: (data) => {
     fetch(`${baseUrl}/items`, {
@@ -140,6 +149,26 @@ const useStore = create<Store>((set, get) => ({
         setLoggedUser(null);
       })
       .catch((error) => console.error(error));
+  },
+  getAllItems: () => {
+    fetch(`${baseUrl}/items`, {
+      credentials: "include",
+    })
+      .then((resp) => resp.json())
+      .then((items) => {
+        console.log("items", items);
+        set({ items: items });
+      });
+  },
+  getUserItems: (id: number) => {
+    fetch(`${baseUrl}/items/${id}`, {
+      credentials: "include",
+    })
+      .then((resp) => resp.json())
+      .then((userItems) => {
+        console.log(userItems)
+        set({ userItems: userItems });
+      });
   },
 }));
 

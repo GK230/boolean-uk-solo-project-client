@@ -1,6 +1,6 @@
 main.home {
   height: 100vh;
-  background-image: url("https://science.nasa.gov/science-pink/s3fs-public/thumbnails/image/Earth%20Day_2021_Desktop_1280x1800_0.jpg");
+  background-image: url("https://png.pngtree.com/thumb_back/fh260/back_our/20190617/ourmid/pngtree-green-fresh-and-environmentally-friendly-poster-background-material-image_127998.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -15,10 +15,11 @@ main.home {
 img.main-image {
   width: 350px;
   border-radius: 10px;
+  border: black solid 2px;
 }
 
 h2.title {
-  color: white;
+  color: black;
   font-size: 3rem;
   font-weight: bolder;
 }

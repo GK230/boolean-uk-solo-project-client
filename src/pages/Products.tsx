@@ -1,4 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import useStore from "../store";
+import { Item } from "../store";
+import bag1 from "../assets/IMG_0082.jpg"
+import bag2 from "../assets/IMG_0084.jpg"
+
+
 
 import ProductCard from "../components/ProductCard"
 import "../styles/products.css"
@@ -134,17 +140,22 @@ const style = {
     return `${value}`;
   }
 
-function Products() {
+  type ProductPageProps = {
+    item: Item;
+  };
+
+function Products({ item }: ProductPageProps) {
+
+
     const [itemType, setItemType] = React.useState<string[]>([]);
     const [brand, setBrand] = React.useState<string[]>([]);
     const [val, setVal] = React.useState(0);
+    const items = useStore(state => state.items)
+    const getAllItems = useStore(state => state.getAllItems)
 
     const handleChange = (event: any, newValue: number | number[]) => {
       setVal(newValue as number);
-    };
-
-    console.log(val)
-    
+    };    
 
 
     const [open, setOpen] = React.useState(false);
@@ -171,6 +182,14 @@ function Products() {
         );
       };
 
+      useEffect(() => {
+        getAllItems();
+      }, [getAllItems]);
+
+      if (!items) {
+        return <h2>loading...</h2>;
+      }
+
     return (
     <main className="products-page">
         <header>
@@ -178,12 +197,25 @@ function Products() {
         </header>
         <section className="filters"></section>
         <section className="container">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+        <article className="product-card">
+            <img className="product-card-image" src={bag1} alt={item.title}/>
+            <h3 className="product-card-title">Leopard print oversized bag</h3>
+            <h4 className="product-card-credits">Credits: 50</h4>
+        </article>
+          <article className="product-card">
+            <img className="product-card-image" src={bag2} alt={item.title}/>
+            <h3 className="product-card-title">Floral waterproof backpack</h3>
+            <h4 className="product-card-credits">Credits 35</h4>
+        </article>
+
+        
+
+          {/* {items.map((item) =>(
+            <ProductCard 
+            key={item.id}
+						item={item as Item}
+            />
+            ))} */}
 
         </section>
 

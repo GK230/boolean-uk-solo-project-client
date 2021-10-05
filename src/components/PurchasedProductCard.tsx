@@ -1,7 +1,13 @@
 import "../styles/product-card.css"
 import test from "../assets/clock.jpg"
+import { Item } from "../store"
 
-function PurchasedProductCard() {
+
+type ProductPageProps = {
+    item: Item;
+  };
+
+function PurchasedProductCard({ item }: ProductPageProps) {
     return (
         <article className="product-card">
             <img className="product-card-image" src={test} alt="title"/>

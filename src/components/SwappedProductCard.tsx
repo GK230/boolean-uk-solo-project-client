@@ -1,12 +1,18 @@
 import "../styles/product-card.css"
-import test from "../assets/clock.jpg"
+import { Item } from "../store"
 
-function SwappedProductCard() {
+
+type ProductPageProps = {
+    item: Item;
+  };
+
+
+function SwappedProductCard({ item }: ProductPageProps) {
     return (
         <article className="product-card">
-            <img className="product-card-image" src={test} alt="title"/>
-            <h3 className="product-card-title">Roman Numeral Clock</h3>
-            <h4 className="product-card-credits">Credits: 5</h4>
+            <img className="product-card-image" src={`baseUrl${item.image}`} alt="title"/>
+            <h3 className="product-card-title">{item.title}</h3>
+            <h4 className="product-card-credits">{item.credits}</h4>
         </article>
     )
 }
