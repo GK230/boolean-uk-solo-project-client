@@ -5,7 +5,7 @@ An online home and fashion swapping and shopping app - users can upload items in
 
 ![swapshop-image](https://user-images.githubusercontent.com/52134584/136001540-6c297c4e-3a08-4558-a3a3-ebcf7e11361f.png)
 
-## [Website](https://swapshop.netlify.app)
+## Visit the site: (https://swapshop.netlify.app)
 
 As a self confessed shopaholic who does not want to be cured, but also wants to save the planet, I decided to come up with an outlet for my addiction - a new way of shopping. Below is an example of some of the wireframes I used to build the app. 
 
