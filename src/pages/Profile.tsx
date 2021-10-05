@@ -3,7 +3,7 @@ import "../styles/profile.css"
 // import PurchasedProductCard from "../components/PurchasedProductCard"
 import SwappedProductCard from "../components/SwappedProductCard"
 import useStore, { Item } from "../store"
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 
 type ProductPageProps = {
@@ -23,7 +23,7 @@ function Profile({ item }: ProductPageProps) {
     useEffect(() => {
         getUserItems(1);
         console.log("userItem", userItems)
-      }, []);
+      }, [getUserItems, userItems]);
 
 
       if (!userItems) {

@@ -6,7 +6,7 @@ import bag2 from "../assets/IMG_0084.jpg"
 
 
 
-import ProductCard from "../components/ProductCard"
+// import ProductCard from "../components/ProductCard"
 import "../styles/products.css"
 
 import Backdrop from '@mui/material/Backdrop';
