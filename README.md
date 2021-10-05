@@ -1,6 +1,8 @@
 # SwapShop (Frontend)
 
-An online home and fashion swapping and shopping app
+An online home and fashion swapping and shopping app - users can upload items in return for credits and then spend those credits on other items on the site
+
+
 
 
 # Getting Started with Create React App
