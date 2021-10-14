@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import ProductPage from "./pages/ProductPage";
 import Basket from "./pages/Basket";
 import Swap from "./pages/Swap";
+import Success from "./pages/Success";
 import { LoggedInHeader } from './components/Header';
 import { getValidateCurrToken, postLoginUser } from "./utils/apiClient";
 
@@ -148,7 +149,10 @@ function App() {
             <Basket />
           </Route>
           <Route path="/swap" exact>
-            <Swap />
+            <Swap loggedUser={loggedUser} clearUserState={clearUserState}/>
+          </Route>
+          <Route path="/success" exact>
+            <Success />
           </Route>
         </Switch>
         </div>

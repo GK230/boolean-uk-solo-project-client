@@ -26,7 +26,7 @@ export async function postLoginUser(userCreds: UserCredentials) {
 
 export async function getLogoutUser() {
   return await (
-    await genericFetch(URL + "logout")
+    await genericFetch(URL + "/logout")
   ).data;
 }
 

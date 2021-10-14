@@ -19,7 +19,6 @@ type HeaderProps = {
     clearUserState: (data: null) => void;
   }) {
 
-    console.log(username)
     return (
       <section className="loggedin-header">
         <Link to="/">

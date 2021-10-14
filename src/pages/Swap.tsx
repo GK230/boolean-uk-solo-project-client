@@ -13,6 +13,17 @@ import { Theme, useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { baseUrl } from "../store"
 
+export type UserCreds = {
+  id: any;
+  username: string;
+  password: string;
+};
+
+type HeaderProps = {
+  loggedUser: UserCreds | null;
+  clearUserState: (data: null) => void;
+};
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -58,11 +69,7 @@ const itemType = [
         "living-room",
       ];
 
-function Swap() {
-
-    const loggedUser = useStore(state => state.loggedUser)
-
-    if (!loggedUser) { <Redirect to="/home" />}
+function Swap({ loggedUser, clearUserState }: HeaderProps) {
     
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
@@ -84,6 +91,7 @@ function Swap() {
     function submitForm(event: SyntheticEvent) {
       const targetEvent = event.target as HTMLFormElement;
       event.preventDefault();
+      const userId = loggedUser?.id
       const formData = new FormData();
       const images = targetEvent.files.files;
       for(let i = 0; i < images.length; i++) {
@@ -97,6 +105,7 @@ function Swap() {
         formData.append("items", names[i]);
       }
       formData.append("brand", brand)
+      formData.append("userId", userId)
       // const user = loggedUser.username
 
       // formData.append("user", user)
