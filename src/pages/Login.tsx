@@ -28,29 +28,18 @@ function Login({ handleSubmit }: LoginProps) {
         setLoginForm({ ...loginForm, [name]: value });
       }
 
-      // useEffect(() => {
-      //   getValidateCurrToken()
-      //     .then(user => {
-      //       setLoggedUser(user);
-      //       <Redirect to="/profile"/>
-      //     })
-      //     .catch(err => {
-      //       setErrorStatus(err.message);
-      //     });
-      // }, []);
-
       return (
         <main className="signup-page">
           <h2 className="signup-title">Log in</h2>
           <form className="signup-form" onSubmit={e => {
         e.preventDefault();
-        // setLoginForm(initialForm)
-        handleSubmit(loginForm)
+        handleSubmit(loginForm);
+       
       }}
       >
             <input type="text" name="username" placeholder="Username" onChange={handleLoginChange} value={loginForm.username}/>
             <input type="password" name="password" placeholder="Password"onChange={handleLoginChange} value={loginForm.password}/>
-            <button className="signup-submit" type="submit" value="submit">Submit</button>
+            <button className="signup-submit" type="submit" value="submit" >Submit</button>
           </form>
       
     </main>

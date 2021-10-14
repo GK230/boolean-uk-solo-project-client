@@ -15,16 +15,6 @@ function Profile({ item }: ProductPageProps) {
     const userItems = useStore(state => state.userItems)
     const getUserItems = useStore(state => state.getUserItems)
 
-    const { id } = useParams<{ id: string }>();
-    console.log(id)
-    let newId = +id
-
-
-    useEffect(() => {
-        getUserItems(newId);
-        console.log("userItem", userItems)
-      }, [getUserItems, userItems, newId]);
-
 
       if (!userItems) {
         return <h2>loading...</h2>;
@@ -43,9 +33,9 @@ function Profile({ item }: ProductPageProps) {
             <h3 className="profile-items-title">Swapped items</h3>
             <section className="swapped-products">
             
-            {userItems.map(item =>
+            {/* {userItems.map(item =>
                 <SwappedProductCard item={item}/>
-            )}
+            )} */}
             </section>
         </main>
     

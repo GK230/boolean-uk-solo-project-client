@@ -15,6 +15,10 @@ img.logo {
   border: fuchsia 2px solid;
 }
 
+a {
+  text-decoration: none;
+}
+
 section.loggedin-header {
   background-color: transparent;
   height: 0;
@@ -110,6 +114,7 @@ div.auth-buttons {
   position: absolute;
   right: 20px;
   top: 40px;
+  text-decoration: none;
 }
 
 button.login {

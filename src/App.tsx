@@ -55,7 +55,8 @@ function App() {
     getValidateCurrToken()
       .then((user) => {
         setLoggedUser(user);
-        history.push("/");      })
+        history.push("/");      
+      })
       // .catch(err:(any: any) => {
       //   setErrorStatus(err.message);
       // });
@@ -71,28 +72,28 @@ function App() {
 
   console.log(loggedUser)
 
-
   return (
-    <Router >
-      <div className="app-tsx">
+    <Router>
+
       
       <Header loggedUser={loggedUser} clearUserState={clearUserState} />
       {errorStatus && (
           <h3 style={{ color: "red" }}>{errorMsgs[errorStatus]}</h3>
         )}
+      <div className="app-tsx">
 
       <Switch>
         <Route path="/" exact>
             <Home />
           </Route>
-          
-          
-          <Route path="/signup" exact>
+        <Route path="/signup" exact>
             <Signup />
           </Route>
           <Route path="/login" exact>
-          <Login handleSubmit={loginUser} />
-          {loggedUser?.username ? <Profile item={{
+            <Login handleSubmit={loginUser} />
+          </Route>
+          <Route path="profile" exact>
+          <Profile item={{
               id: 0,
               userId: 0,
               credits: 0,
@@ -102,7 +103,7 @@ function App() {
               itemTypes: [],
               brand: "",
               review: undefined
-            }}/> : <Redirect to="/login"/> }
+            }}/> : <Redirect to="/" />
           </Route>
           <Route path="/products" exact>
             <Products item={{
@@ -131,18 +132,17 @@ function App() {
             }} />
           </Route>
           <Route path="/profile" exact>
-            
-          {loggedUser?.username ? <Profile item={{
-              id: 0,
-              userId: 0,
-              credits: 0,
-              image: "",
-              title: "",
-              description: "",
-              itemTypes: [],
-              brand: "",
-              review: undefined
-            }}/> : <Redirect to="/login"/> }
+            <Profile item={{
+                id: 0,
+                userId: 0,
+                credits: 0,
+                image: "",
+                title: "",
+                description: "",
+                itemTypes: [],
+                brand: "",
+                review: undefined
+              }}/> 
           </Route>
           <Route path="/basket" exact>
             <Basket />

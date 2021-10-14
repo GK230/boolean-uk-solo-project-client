@@ -128,6 +128,7 @@ const useStore = create<Store>((set, get) => ({
         set({ loggedUser: userToken });
       });
   },
+
   logout: () => {
     fetch(`${baseUrl}/logout`, {
       credentials: "include",
@@ -155,7 +156,6 @@ const useStore = create<Store>((set, get) => ({
     })
       .then((resp) => resp.json())
       .then((items) => {
-        console.log("items", items);
         set({ items: items });
       });
   },

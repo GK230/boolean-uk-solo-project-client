@@ -18,21 +18,15 @@ type HeaderProps = {
     username: string;
     clearUserState: (data: null) => void;
   }) {
-    const loggedUser = useStore(state => state.loggedUser)
 
-    
-
-
+    console.log(username)
     return (
       <section className="loggedin-header">
         <Link to="/">
               <img className="logo" src={logo} alt="Logo" />
             </Link>
-        {loggedUser === undefined? 
-  
-              <Redirect to="/" />:
-
-        <h3 className="welcome">Welcome, {loggedUser.username}</h3>}
+        
+        <h3 className="welcome">Welcome, {username}</h3>
         <div className="loggedin-buttons">
           <Link to="/swap">
             <button className="swap">Swap</button>
@@ -61,9 +55,16 @@ type HeaderProps = {
 
     return (
         <section className="header">
-            <Link to="/">
+          <Link to="/">
               <img className="logo" src={logo} alt="Logo" />
             </Link>
+          {loggedUser ? (
+        <LoggedInHeader
+          username={loggedUser.username}
+          clearUserState={clearUserState}
+        />
+      ) : 
+            
             <div className="auth-buttons">
               
                 <Link to="/login">
@@ -74,7 +75,7 @@ type HeaderProps = {
                     <button className="products-button auth-button signup">Sign up</button>
                 </Link>
                 
-            </div>
+            </div>}
             
         </section>
 

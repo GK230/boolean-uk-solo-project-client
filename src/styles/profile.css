@@ -7,18 +7,9 @@ main.profile {
 
 section.profile-details {
   display: grid;
-  grid-template-columns: 1fr 400px;
-}
-
-img.profile-avatar {
-  border-radius: 50%;
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  justify-self: center;
-  align-self: end;
-  margin-top: 8rem;
-  border: black solid 2px;
+  align-items: bottom;
+  justify-content: center;
+  margin-top: 10rem;
 }
 
 h4.profile-credits {
