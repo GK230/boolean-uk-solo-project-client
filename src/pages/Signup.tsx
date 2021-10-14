@@ -5,22 +5,18 @@ import useStore from "../store"
 const initialSignupForm = {
     email: "",
     username: "",
-    avatar: "",
     password: ""
 }
 
 export type SignupForm = {
     email: string;
     username: string;
-    avatar: string;
     password: string;
 };
 
 function Signup() {
     const [signupForm, setSignupForm] = useState<SignupForm>(initialSignupForm);
     const createUser = useStore((store) => store.createUser);
-
-
 
     function handleChange(e: SyntheticEvent) {
         const { name, value } = e.target as HTMLInputElement;
@@ -34,9 +30,9 @@ function Signup() {
             email: targetEvent.email.value,
             username: targetEvent.username.value,
             password: targetEvent.password.value,
+            totalCredits: 0
           };
 
-          
         createUser(newUser)
         targetEvent.reset();
     }

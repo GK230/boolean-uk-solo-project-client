@@ -3,7 +3,7 @@ import "../styles/profile.css"
 // import PurchasedProductCard from "../components/PurchasedProductCard"
 import SwappedProductCard from "../components/SwappedProductCard"
 import useStore, { Item } from "../store"
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 type ProductPageProps = {
@@ -15,15 +15,15 @@ function Profile({ item }: ProductPageProps) {
     const userItems = useStore(state => state.userItems)
     const getUserItems = useStore(state => state.getUserItems)
 
-    
-
-    // const { id } = useParams<{ id: string }>();
+    const { id } = useParams<{ id: string }>();
+    console.log(id)
+    let newId = +id
 
 
     useEffect(() => {
-        getUserItems(1);
+        getUserItems(newId);
         console.log("userItem", userItems)
-      }, [getUserItems, userItems]);
+      }, [getUserItems, userItems, newId]);
 
 
       if (!userItems) {

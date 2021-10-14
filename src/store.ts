@@ -25,7 +25,6 @@ export type User = {
   id: number;
   email: string;
   username: string;
-  avatar: string;
   totalCredits: Number;
   purchase?: Purchase[];
   Items?: Item[];
@@ -97,7 +96,7 @@ const useStore = create<Store>((set, get) => ({
   setLoggedUser: (loggedUser) => set({ loggedUser: loggedUser }),
 
   createUser: (data) => {
-    fetch(`${baseUrl}/user`, {
+    fetch(`${baseUrl}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -8,14 +8,6 @@ async function genericFetch(url: string, options?: RequestInit) {
   ).json();
 }
 
-/* 
-
-You need to use `credentials include` in your fetch options, if you save your JWT token in a HTTP only cookie!! 
-
-fetch(URL, { method: "POST", credentials: "include" });
-
-*/
-
 async function genericPost(url: string, payload: unknown) {
   return await genericFetch(url, {
     method: "POST",
@@ -26,12 +18,6 @@ async function genericPost(url: string, payload: unknown) {
   });
 }
 
-export async function getUserPosts() {
-  return await (
-    await genericFetch(URL + "posts")
-  ).data;
-}
-
 export async function postLoginUser(userCreds: UserCredentials) {
   return await (
     await genericPost(URL + "/login", userCreds)
@@ -40,6 +26,12 @@ export async function postLoginUser(userCreds: UserCredentials) {
 
 export async function getLogoutUser() {
   return await (
-    await genericFetch(URL + "/logout")
+    await genericFetch(URL + "logout")
+  ).data;
+}
+
+export async function getValidateCurrToken() {
+  return await (
+    await genericFetch(URL + "/validate-token")
   ).data;
 }

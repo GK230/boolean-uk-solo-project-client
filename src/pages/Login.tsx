@@ -1,8 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import "../styles/signup.css"
 import "../styles/login.css"
-// import { getValidateCurrToken } from "../utils/apiClient";
+import { Redirect } from "react-router-dom";
+import { UserCreds } from "../store";
 
 const initialForm = {
     username: "",
@@ -21,18 +21,12 @@ const initialForm = {
 function Login({ handleSubmit }: LoginProps) {
 
     const [loginForm, setLoginForm] = useState<UserCredentials>(initialForm);
-    // const [loggedUser, setLoggedUser] = useState<UserCreds | null>(null);
-    // const [errorStatus, setErrorStatus] = useState<string>("empty");
-    // console.log(loggedUser)
-    // console.log(errorStatus)
 
     function handleLoginChange(e: SyntheticEvent) {
         const { name, value } = e.target as HTMLInputElement;
     
         setLoginForm({ ...loginForm, [name]: value });
       }
-
-      
 
       // useEffect(() => {
       //   getValidateCurrToken()
@@ -50,7 +44,7 @@ function Login({ handleSubmit }: LoginProps) {
           <h2 className="signup-title">Log in</h2>
           <form className="signup-form" onSubmit={e => {
         e.preventDefault();
-        setLoginForm(initialForm)
+        // setLoginForm(initialForm)
         handleSubmit(loginForm)
       }}
       >
