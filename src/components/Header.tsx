@@ -1,9 +1,13 @@
 import logo from "../assets/logo.png"
 import '../styles/header.css'
-import { Link, Redirect } from "react-router-dom"
-import { UserCreds } from "../App";
+import { Link } from "react-router-dom"
 import { getLogoutUser } from "../utils/apiClient";
-import useStore from "../store"
+
+export type UserCreds = {
+  id: number;
+  username: string;
+  password: string;
+};
 
 type HeaderProps = {
     loggedUser: UserCreds | null;

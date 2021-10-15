@@ -1,6 +1,8 @@
 import create from "zustand";
 
-export const baseUrl = "http://localhost:3030";
+const baseUrl = process.env.REACT_APP_API_URL 
+
+// export const baseUrl = "http://localhost:3030";
 
 export type UserCreds = {
   id: number;
@@ -166,7 +168,7 @@ const useStore = create<Store>((set, get) => ({
       .then((resp) => resp.json())
       .then((userItems) => {
         console.log(userItems)
-        set({ userItems: userItems });
+        set({ userItems: userItems.data });
       });
   },
 }));

@@ -1,8 +1,7 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import "../styles/signup.css"
 import "../styles/login.css"
-import { Redirect } from "react-router-dom";
-import { UserCreds } from "../store";
+
 
 const initialForm = {
     username: "",

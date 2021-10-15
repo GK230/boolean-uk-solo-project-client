@@ -1,7 +1,6 @@
 import React from "react"
 import "../styles/signup.css"
 import "../styles/swap.css"
-import useStore from "../store"
 import { Redirect } from "react-router"
 import { SyntheticEvent } from "react"
 import Box from '@mui/material/Box';
@@ -11,7 +10,6 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Theme, useTheme } from '@mui/material/styles';
 import OutlinedInput from '@mui/material/OutlinedInput';
-import { baseUrl } from "../store"
 
 export type UserCreds = {
   id: any;
@@ -70,7 +68,9 @@ const itemType = [
       ];
 
 function Swap({ loggedUser, clearUserState }: HeaderProps) {
-    
+
+    const baseUrl = process.env.REACT_APP_API_URL 
+
     const [title, setTitle] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [personName, setPersonName] = React.useState<string[]>([]);
@@ -114,9 +114,13 @@ function Swap({ loggedUser, clearUserState }: HeaderProps) {
           method: 'post',
           body: formData
       })
-          .then((res) => console.log(res))
-          .catch((err) => (err));
-  }
+          .then((res) => {
+            if (res.ok) {
+              return res.json()
+             }
+          });
+          <Redirect to="/sucess"/>
+        }
 
     const theme = useTheme();
     

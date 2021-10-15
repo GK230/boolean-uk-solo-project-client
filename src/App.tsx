@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Redirect,
   useHistory,
   BrowserRouter as Router,
   Switch,
@@ -16,7 +15,6 @@ import ProductPage from "./pages/ProductPage";
 import Basket from "./pages/Basket";
 import Swap from "./pages/Swap";
 import Success from "./pages/Success";
-import { LoggedInHeader } from './components/Header';
 import { getValidateCurrToken, postLoginUser } from "./utils/apiClient";
 
 
@@ -32,13 +30,8 @@ export type User = {
   password: string;
 };
 
-type ErrorOpts = {
-  [key: string]: null | string;
-};
-
 function App() {
   const [loggedUser, setLoggedUser] = useState<User | null>(null);
-  const [errorStatus, setErrorStatus] = useState<string>("empty");
   const history = useHistory();
 
   function loginUser(userCreds: UserCredentials) {
@@ -64,23 +57,13 @@ function App() {
   }, [history, setLoggedUser]);
 
 
-
-  const errorMsgs: ErrorOpts = {
-    empty: null,
-    401: "You weren't previously logged in",
-    403: null,
-  };
-
-  console.log(loggedUser)
-
+  
   return (
     <Router>
 
       
       <Header loggedUser={loggedUser} clearUserState={clearUserState} />
-      {errorStatus && (
-          <h3 style={{ color: "red" }}>{errorMsgs[errorStatus]}</h3>
-        )}
+      
       <div className="app-tsx">
 
       <Switch>
@@ -93,8 +76,8 @@ function App() {
           <Route path="/login" exact>
             <Login handleSubmit={loginUser} />
           </Route>
-          <Route path="profile" exact>
-          <Profile item={{
+          <Route path="/profile" exact>
+            <Profile loggedUser={loggedUser} clearUserState={clearUserState} item={{
               id: 0,
               userId: 0,
               credits: 0,
@@ -104,7 +87,7 @@ function App() {
               itemTypes: [],
               brand: "",
               review: undefined
-            }}/> : <Redirect to="/" />
+            }} />
           </Route>
           <Route path="/products" exact>
             <Products item={{
@@ -132,19 +115,7 @@ function App() {
               review: undefined
             }} />
           </Route>
-          <Route path="/profile" exact>
-            <Profile item={{
-                id: 0,
-                userId: 0,
-                credits: 0,
-                image: "",
-                title: "",
-                description: "",
-                itemTypes: [],
-                brand: "",
-                review: undefined
-              }}/> 
-          </Route>
+          
           <Route path="/basket" exact>
             <Basket />
           </Route>
