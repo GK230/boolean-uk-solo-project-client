@@ -20,18 +20,18 @@ async function genericPost(url: string, payload: unknown) {
 
 export async function postLoginUser(userCreds: UserCredentials) {
   return await (
-    await genericPost(URL + "/login", userCreds)
+    await genericPost(URL + "login", userCreds)
   ).data;
 }
 
 export async function getLogoutUser() {
   return await (
-    await genericFetch(URL + "/logout")
+    await genericFetch(URL + "logout")
   ).data;
 }
 
 export async function getValidateCurrToken() {
   return await (
-    await genericFetch(URL + "/validate-token")
+    await genericFetch(URL + "validate-token")
   ).data;
 }
