@@ -1,6 +1,6 @@
 import create from "zustand";
 
-const baseUrl = process.env.REACT_APP_API_URL 
+const baseUrl = process.env.REACT_APP_API_URL;
 
 // export const baseUrl = "http://localhost:3030";
 
@@ -98,7 +98,7 @@ const useStore = create<Store>((set, get) => ({
   setLoggedUser: (loggedUser) => set({ loggedUser: loggedUser }),
 
   createUser: (data) => {
-    fetch(`${baseUrl}/signup`, {
+    fetch(`${baseUrl}signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -110,7 +110,7 @@ const useStore = create<Store>((set, get) => ({
       .then((newUser) => set({ users: [...get().users, newUser] }));
   },
   addItem: (data) => {
-    fetch(`${baseUrl}/items`, {
+    fetch(`${baseUrl}items`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -122,7 +122,7 @@ const useStore = create<Store>((set, get) => ({
       .then((newItem) => set({ items: [...get().items, newItem] }));
   },
   getValidateCurrToken: () => {
-    fetch(`${baseUrl}/validate-token`, {
+    fetch(`${baseUrl}validate-token`, {
       credentials: "include",
     })
       .then((resp) => resp.json())
@@ -132,7 +132,7 @@ const useStore = create<Store>((set, get) => ({
   },
 
   logout: () => {
-    fetch(`${baseUrl}/logout`, {
+    fetch(`${baseUrl}logout`, {
       credentials: "include",
       method: "GET",
       headers: {
@@ -153,7 +153,7 @@ const useStore = create<Store>((set, get) => ({
       .catch((error) => console.error(error));
   },
   getAllItems: () => {
-    fetch(`${baseUrl}/items`, {
+    fetch(`${baseUrl}items`, {
       credentials: "include",
     })
       .then((resp) => resp.json())
@@ -162,12 +162,12 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   getUserItems: (id: number) => {
-    fetch(`${baseUrl}/items/${id}`, {
+    fetch(`${baseUrl}items/${id}`, {
       credentials: "include",
     })
       .then((resp) => resp.json())
       .then((userItems) => {
-        console.log(userItems)
+        console.log(userItems);
         set({ userItems: userItems.data });
       });
   },
